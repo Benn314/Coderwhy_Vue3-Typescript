@@ -65,7 +65,8 @@
               "state": {}
             }
           }
-        ]
+        ],
+        "currentTab": 2
       }
     ],
     "direction": "horizontal",
@@ -148,6 +149,7 @@
   },
   "active": "260dc2d5e08176d1",
   "lastOpenFiles": [
+    "学习日报/7月11日.assets/image-20230711184811145.png",
     "src/01_Vue3初体验/core/pnpm-lock.yaml",
     "note.assets/image-20230711171639681.png",
     "note.assets/image-20230711171404722.png",
@@ -160,7 +162,6 @@
     "src/01_Vue3初体验/core/packages/size-check/node_modules",
     "src/01_Vue3初体验/core/packages/sfc-playground/node_modules/@vue",
     "src/01_Vue3初体验/core/packages/sfc-playground/node_modules/@vitejs",
-    "src/01_Vue3初体验/core/packages/sfc-playground/node_modules",
     "note.assets/image-20230711170334464.png",
     "note.assets/image-20230711151935500.png",
     "note.assets/image-20230711151858405.png",

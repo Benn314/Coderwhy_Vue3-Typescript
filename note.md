@@ -83,6 +83,8 @@ template标签不是vue特有的，html标签本身就有定义这个template标
 
 > 作用：被javascript源代码读取，在scirpt标签里去用
 
+^00ee8c
+
 [MDN | <template>：内容模板元素](https://developer.mozilla.org/zh-CN/docs/Web/HTML/Element/template)
 
 虽然解析器在加载页面时确实会处理 **`<template>`** 元素的内容，但这样做只是为了确保这些内容有效；但元素内容不会被渲染。——MDN
@@ -95,7 +97,7 @@ template标签不是vue特有的，html标签本身就有定义这个template标
 
 如果用的不是template标签而是其他标签（例如div标签），那么页面会被渲染两次的（一次是原生渲染一次是经过vue处理后渲染），为什么会这样？
 
-> 上面刚刚已经说明了原因，template标签是不会被浏览器渲染（看上面写的[[note#^b491fb | template作用]]）
+> 上面刚刚已经说明了原因，template标签是不会被浏览器渲染（看上面写的[[note#^00ee8c | template作用]]）
 
 ![image-20230711111937205](note.assets/image-20230711111937205.png)
 
