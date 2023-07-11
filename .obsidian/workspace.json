@@ -1,0 +1,192 @@
+{
+  "main": {
+    "id": "a260244ab3b4d2be",
+    "type": "split",
+    "children": [
+      {
+        "id": "8ba87bbb56527cfa",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "260dc2d5e08176d1",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "note.md",
+                "mode": "preview",
+                "source": false
+              }
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "vertical"
+  },
+  "left": {
+    "id": "8f7b588c88adf58d",
+    "type": "split",
+    "children": [
+      {
+        "id": "659acbbbb5c34a57",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "ac4ff6211b0e16ec",
+            "type": "leaf",
+            "state": {
+              "type": "file-explorer",
+              "state": {
+                "sortOrder": "alphabetical"
+              }
+            }
+          },
+          {
+            "id": "644b0a3bc0444f03",
+            "type": "leaf",
+            "state": {
+              "type": "search",
+              "state": {
+                "query": "template作用",
+                "matchingCase": false,
+                "explainSearch": false,
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical"
+              }
+            }
+          },
+          {
+            "id": "08be8c60b11dcaec",
+            "type": "leaf",
+            "state": {
+              "type": "bookmarks",
+              "state": {}
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300
+  },
+  "right": {
+    "id": "ecdc712715535c49",
+    "type": "split",
+    "children": [
+      {
+        "id": "2382308f5455a73c",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "bfcedd4365546d8e",
+            "type": "leaf",
+            "state": {
+              "type": "backlink",
+              "state": {
+                "file": "note.md",
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical",
+                "showSearch": false,
+                "searchQuery": "",
+                "backlinkCollapsed": false,
+                "unlinkedCollapsed": true
+              }
+            }
+          },
+          {
+            "id": "8bf091969150d867",
+            "type": "leaf",
+            "state": {
+              "type": "outgoing-link",
+              "state": {
+                "file": "note.md",
+                "linksCollapsed": false,
+                "unlinkedCollapsed": true
+              }
+            }
+          },
+          {
+            "id": "8d770eeda3193824",
+            "type": "leaf",
+            "state": {
+              "type": "tag",
+              "state": {
+                "sortOrder": "frequency",
+                "useHierarchy": true
+              }
+            }
+          },
+          {
+            "id": "c174fceff0ac9f74",
+            "type": "leaf",
+            "state": {
+              "type": "outline",
+              "state": {
+                "file": "note.md"
+              }
+            }
+          }
+        ],
+        "currentTab": 3
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300
+  },
+  "left-ribbon": {
+    "hiddenItems": {
+      "switcher:打开快速切换": false,
+      "graph:查看关系图谱": false,
+      "canvas:新建白板": false,
+      "daily-notes:打开/创建今天的日记": false,
+      "templates:插入模板": false,
+      "command-palette:打开命令面板": false
+    }
+  },
+  "active": "260dc2d5e08176d1",
+  "lastOpenFiles": [
+    "src/01_Vue3初体验/core/packages/compiler-core/node_modules/@vue",
+    "src/01_Vue3初体验/core/packages/compiler-core/node_modules/@babel",
+    "src/01_Vue3初体验/core/packages/compiler-core/node_modules",
+    "src/01_Vue3初体验/core/packages/vue-compat/node_modules/@babel",
+    "src/01_Vue3初体验/core/packages/vue-compat/node_modules",
+    "src/01_Vue3初体验/core/packages/template-explorer/node_modules",
+    "src/01_Vue3初体验/core/packages/size-check/node_modules",
+    "src/01_Vue3初体验/core/packages/sfc-playground/node_modules/@vue",
+    "src/01_Vue3初体验/core/packages/sfc-playground/node_modules/@vitejs",
+    "src/01_Vue3初体验/core/packages/sfc-playground/node_modules",
+    "src/01_Vue3初体验/core/packages/server-renderer/node_modules/@vue",
+    "note.assets/image-20230711170334464.png",
+    "note.assets/image-20230711151935500.png",
+    "note.assets/image-20230711151858405.png",
+    "src/01_Vue3初体验/core/changelogs/CHANGELOG-3.2.md",
+    "src/01_Vue3初体验/core/changelogs/CHANGELOG-3.1.md",
+    "src/01_Vue3初体验/core/changelogs/CHANGELOG-3.0.md",
+    "src/01_Vue3初体验/core/packages/sfc-playground/src/download/template/README.md",
+    "src/01_Vue3初体验/core/packages/sfc-playground/public/logo.svg",
+    "src/01_Vue3初体验/core/packages/vue-compat/README.md",
+    "src/01_Vue3初体验/core/packages/vue/README.md",
+    "src/01_Vue3初体验/core/packages/template-explorer/README.md",
+    "src/01_Vue3初体验/core/packages/size-check/README.md",
+    "src/01_Vue3初体验/core/packages/sfc-playground/README.md",
+    "src/01_Vue3初体验/core/packages/shared/README.md",
+    "src/01_Vue3初体验/core/packages/server-renderer/README.md",
+    "src/01_Vue3初体验/core/packages/runtime-test/README.md",
+    "src/01_Vue3初体验/core/packages/runtime-core/README.md",
+    "src/01_Vue3初体验/core/packages/runtime-dom/README.md",
+    "src/01_Vue3初体验/core/packages/reactivity-transform/README.md",
+    "src/01_Vue3初体验/core/packages/reactivity/README.md",
+    "src/01_Vue3初体验/core/packages/dts-test/README.md",
+    "src/01_Vue3初体验/core/packages/compiler-ssr/README.md",
+    "src/01_Vue3初体验/core/packages/compiler-sfc/README.md",
+    "src/01_Vue3初体验/core/packages/compiler-core/README.md",
+    "src/01_Vue3初体验/core/packages/compiler-dom/README.md",
+    "note.assets/image-20230711142603499.png",
+    "note.assets/image-20230711142459508.png",
+    "README.md",
+    "note.md"
+  ]
+}

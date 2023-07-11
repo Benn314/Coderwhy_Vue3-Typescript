@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <div id="app"></div>
+  <script src="../js/vue.js"></script>
+  <script>
+    Vue.createApp({
+      // 在template中需要使用元素标签多的情况可以使用模板字符串，比普通单/双字符串方便
+      template: `
+        <div>
+          <h2>{{message}}</h2>
+          <h2>{{count}}</h2>
+          <button @click='increment'>+1</button>
+          <button @click='decrement'>-1</button>  
+        </div>
+      `,
+      // 在vue2中，data是一个对象，但在vue3中，data是一个函数，我们一般是return一个对象
+      // vue使得我们不需要再去进行原生dom绑定，data里返回的属性都会被加入响应式系统中，可以在模板中使用
+      data: function(){
+        return {
+          message:'hello',
+          count: 100
+        }
+      },
+      methods:{
+        increment(){
+          // this拿的其实是proxy代理里的东西，再去获取到data里的属性count（答：这一部分是被Vue的响应式系统劫持）
+          this.count++;
+        },
+        decrement(){
+          this.count--;
+        }
+      }
+    }).mount('#app')
+  </script>
+</body>
+</html>
