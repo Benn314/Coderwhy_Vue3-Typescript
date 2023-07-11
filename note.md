@@ -82,13 +82,12 @@ vue作为中间层，帮助实现数据双向绑定和dom操作
 template标签不是vue特有的，html标签本身就有定义这个template标签，而且它里面的内容默认情况下不会被浏览器渲染，那么它有什么作用呢？
 
 > 作用：被javascript源代码读取，在scirpt标签里去用
->
-> [MDN | <template>：内容模板元素](https://developer.mozilla.org/zh-CN/docs/Web/HTML/Element/template)
->
-> 虽然解析器在加载页面时确实会处理 **`<template>`** 元素的内容，但这样做只是为了确保这些内容有效；但元素内容不会被渲染。——MDN
+
+[MDN | <template>：内容模板元素](https://developer.mozilla.org/zh-CN/docs/Web/HTML/Element/template)
+
+虽然解析器在加载页面时确实会处理 **`<template>`** 元素的内容，但这样做只是为了确保这些内容有效；但元素内容不会被渲染。——MDN
 
 ---
-
 
 ![image-20230711111112616](note.assets/image-20230711111112616.png)
 
