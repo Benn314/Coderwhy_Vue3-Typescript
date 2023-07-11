@@ -148,6 +148,9 @@
   },
   "active": "260dc2d5e08176d1",
   "lastOpenFiles": [
+    "src/01_Vue3初体验/core/pnpm-lock.yaml",
+    "note.assets/image-20230711171639681.png",
+    "note.assets/image-20230711171404722.png",
     "src/01_Vue3初体验/core/packages/compiler-core/node_modules/@vue",
     "src/01_Vue3初体验/core/packages/compiler-core/node_modules/@babel",
     "src/01_Vue3初体验/core/packages/compiler-core/node_modules",
@@ -158,7 +161,6 @@
     "src/01_Vue3初体验/core/packages/sfc-playground/node_modules/@vue",
     "src/01_Vue3初体验/core/packages/sfc-playground/node_modules/@vitejs",
     "src/01_Vue3初体验/core/packages/sfc-playground/node_modules",
-    "src/01_Vue3初体验/core/packages/server-renderer/node_modules/@vue",
     "note.assets/image-20230711170334464.png",
     "note.assets/image-20230711151935500.png",
     "note.assets/image-20230711151858405.png",

@@ -128,3 +128,34 @@ sourcemap有代码映射作用，映射vue.global.js 文件的目标代码具体
 ![image-20230711151935500](D:\BaiduSyncdisk\Coderwhy_Vue3-Typescript\note.assets\image-20230711151935500.png)
 
 ![image-20230711170334464](D:\BaiduSyncdisk\Coderwhy_Vue3-Typescript\note.assets\image-20230711170334464.png)
+
+![image-20230711171404722](D:\BaiduSyncdisk\Coderwhy_Vue3-Typescript\note.assets\image-20230711171404722.png)
+
+有map后缀文件说明sourcemap生效
+
+**Coderwhy_Vue3-Typescript\src\01_Vue3初体验\core\packages\vue\examples\why\demo.html**
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <div id="app">写在#app的这一部分内容会被template标签的内容所替换</div>
+
+  <script src="../../dist/vue.global.js"></script>
+
+  <script>
+    debugger
+    Vue.createApp({
+      template: '<h2>我来啦！</h2>',
+    }).mount('#app')
+  </script>
+</body>
+</html>
+```
+
+![image-20230711171639681](D:\BaiduSyncdisk\Coderwhy_Vue3-Typescript\note.assets\image-20230711171639681.png)
