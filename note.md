@@ -161,3 +161,8 @@ sourcemap有代码映射作用，映射vue.global.js 文件的目标代码具体
 ```
 
 ![image-20230711171639681](note.assets/image-20230711171639681.png)
+
+​	
+
+# Vue3模板语法
+
