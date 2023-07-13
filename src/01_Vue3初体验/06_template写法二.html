@@ -14,7 +14,8 @@
       <h2>{{ message }}</h2>
       <h2>{{ count }}</h2>
       <button @click='increment'>+1</button>
-      <button @click='decrement'>-1</button>  
+      <button @click='decrement'>-1</button>
+      <button @click='btnClick'>看看this值</button>
     </div>
   </template>
 
@@ -46,9 +47,42 @@
         },
         decrement(){
           this.count--;
+        },
+        btnClick: ()=>{
+          // 在这里使用箭头函数打印出来的this是window对象
+          console.log(this);
         }
       }
     }).mount('#app')
+
+    // const foo = ()=>{
+    //   console.log(this);
+    // }
+    // const foo = function(){
+    //   console.log(this);
+    // }
+
+    // foo(); // window 隐式绑定
+
+    // const obj = {
+    //   bar: foo
+    // }
+
+    // obj.bar();
+
+    function bar(){
+      console.log(this);
+    }
+
+    // bar();
+
+    const info = {
+      name:"why"
+    }
+
+    // 显示绑定
+    const foo = bar.find(info);
+    foo();
   </script>
 </body>
 </html>
