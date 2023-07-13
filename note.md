@@ -166,6 +166,8 @@ sourcemap有代码映射作用，映射vue.global.js 文件的目标代码具体
 
 # 02-Vue3模板语法
 
+## 上节课后题
+
 先看看[[note#^3436ef | 第一课-课后思考题]]
 
 { } 大括号并不全是作用域，建议看看作用域的文章
@@ -196,5 +198,235 @@ sourcemap有代码映射作用，映射vue.global.js 文件的目标代码具体
 
 ![image-20230712195214298](note.assets/image-20230712195214298.png)
 
-[coderwhy老师微信公众号推文 | 前端面试之彻底搞懂this指向](https://mp.weixin.qq.com/s/hYm0JgBI25grNG_2sCRlTA)
+[coderwhy老师微信公众号推文 | 前端面试之彻底搞懂this指向](https://mp.weixin.qq.com/s/hYm0JgBI25grNG_2sCRlTA) ^5e5364
+
+> 简单讲一下 call、bind、apply，这三个都是显式指定this指向
+>
+> - call和apply的区别是：call传入单参数，apply传入数组参数
+>
+> - call和apply 与 bind 的区别是：call和apply是一次性绑定，apply是永久绑定某对象/方法的this指向
+> - bind是原型对象上的方法，当然也可以自己封装，原理是利用闭包返回apply函数进行绑定，原理看[[note#^5e5364 | 推文]]有详细介绍
+> - setTimeout中会传入一个函数，这个函数中的this通常是window，为什么是window呢？因为setTimeout内部是通过apply进行绑定的this对象，并且绑定的是全局对象；
+
+```
+这样的闭包会被销毁吗？
+
+foo3: function () {
+    return function () {
+      console.log(this.name)
+    }
+  },
+```
+
+> 在给定的代码中，`foo3` 方法返回一个闭包函数。闭包函数保留对其创建时所在的词法环境的引用，即使创建它的外部函数已经执行完毕。因此，闭包函数会继续存在并保持对其创建时的作用域和变量的访问。
+>
+> 当调用 `foo3` 方法时，返回的闭包函数会被赋值给一个变量或直接调用。无论哪种情况，该闭包函数都会继续存在并保持对其词法环境的引用。只有当没有任何引用指向该闭包函数时，它才会被垃圾回收器回收并销毁。
+>
+> 对于给定的闭包函数，它引用了 `this.name`，但是在闭包函数中的 `this` 指向取决于如何调用该函数。如果以对象方法的形式调用闭包函数，例如 `obj.foo3()`，那么 `this` 将指向 `obj`，并且能够访问 `obj` 对象的 `name` 属性。
+>
+> 例如：
+>
+> ```javascript
+> var obj = {
+> name: "example",
+> foo3: function () {
+>  return function () {
+>    console.log(this.name);
+>  };
+> },
+> };
+> 
+> var closure = obj.foo3();
+> closure(); // 输出 "example"
+> ```
+>
+> 在上面的示例中，`closure` 是 `foo3` 返回的闭包函数。当调用 `closure()` 时，`this` 指向 `obj`，并成功输出了 "example"。
+>
+> 总结起来，闭包函数只有在没有任何引用指向它时才会被销毁。在上述示例中，只有当没有任何引用指向返回的闭包函数时，它才会被垃圾回收器回收。
+>
+> **只有当没有任何引用指向返回的闭包函数时，它才会被垃圾回收器回收。这句话怎么理解？能不能举个例子**
+>
+> > 当一个函数被创建并返回后，如果其他变量或函数仍然引用该函数，那么该函数就有一个活跃的引用，垃圾回收器不会将其回收。只有当没有任何变量或函数引用该函数时，垃圾回收器才会将其标记为不再需要，并在适当的时候进行回收。
+> >
+> > 以下是一个示例来说明这个概念：
+> >
+> > ```javascript
+> > function createClosure() {
+> >   var name = "example";
+> > 
+> >   var closure = function() {
+> >     console.log(name);
+> >   };
+> > 
+> >   return closure;
+> > }
+> > 
+> > var closureReference = createClosure();
+> > closureReference(); // 输出 "example"
+> > ```
+> >
+> > 在上面的示例中，`createClosure` 函数创建了一个闭包函数，并将其赋值给 `closureReference` 变量。即使 `createClosure` 函数已经执行完毕，闭包函数仍然存在，并且保持对 `name` 变量的引用。因此，当调用 `closureReference` 函数时，它仍然可以访问并输出 `name` 的值。
+> >
+> > 在这种情况下，闭包函数 `closure` 有一个活跃的引用，因为它被赋值给了 `closureReference` 变量。只有当没有任何变量引用该闭包函数时，垃圾回收器才会将其回收。例如，如果将 `closureReference` 设置为 `null` 或将其赋值为其他值，那么闭包函数就没有任何引用了，最终会被垃圾回收器回收。
+> >
+> > ```javascript
+> > closureReference = null; // 解除对闭包函数的引用
+> > ```
+> >
+> > 一旦没有任何引用指向闭包函数，它就可以被垃圾回收器回收，释放内存资源。
+> >
+> > 总结起来，只有当没有任何变量或函数引用一个闭包函数时，它才会被垃圾回收器回收。
+>
+> **面试题-小试牛刀(代码注释看[[note#^5e5364 | 推文]])**
+>
+> ```js
+> var name = 'window'
+> var person1 = {
+>   name: 'person1',
+>   foo1: function () {
+>     console.log(this.name)
+>   },
+>   foo2: () => console.log(this.name),
+>   foo3: function () {
+>     return function () {
+>       console.log(this.name)
+>     }
+>   },
+>   foo4: function () {
+>     return () => {
+>       console.log(this.name)
+>     }
+>   }
+> }
+> 
+> var person2 = { name: 'person2' }
+> 
+> person1.foo1();   // person1
+> person1.foo1.call(person2); // person2
+> 
+> person1.foo2(); // window
+> // foo2依然是箭头函数，不适用于显示绑定的规则
+> person1.foo2.call(person2); // person2 x window
+> 
+> person1.foo3()(); // window
+> // 但是拿到的返回函数依然是在全局下调用，所以依然是window
+> person1.foo3.call(person2)(); // person2 x window
+> person1.foo3().call(person2); // person2
+> 
+> // foo4()的函数返回的是一个箭头函数
+> // 箭头函数的执行找上层作用域，是person1
+> person1.foo4()(); //window x person1
+> person1.foo4.call(person2)(); //person2
+> // foo4返回的是箭头函数，箭头函数只看上层作用域
+> person1.foo4().call(person2); // person2 x person1
+> ```
+>
+> 做得一塌糊涂...
+>
+> ```js
+> var name = 'window'
+> function Person (name) {
+>   this.name = name
+>   this.foo1 = function () {
+>     console.log(this.name)
+>   },
+>   this.foo2 = () => console.log(this.name),
+>   this.foo3 = function () {
+>     return function () {
+>       console.log(this.name)
+>     }
+>   },
+>   this.foo4 = function () {
+>     return () => {
+>       console.log(this.name)
+>     }
+>   }
+> }
+> var person1 = new Person('person1')
+> var person2 = new Person('person2')
+> 
+> person1.foo1() // person1
+> person1.foo1.call(person2) //person2
+> 
+> // foo是一个箭头函数，会找上层作用域中的this，那么就是person1
+> person1.foo2() // window x person1
+> person1.foo2.call(person2) // person1
+> 
+> person1.foo3()() // window
+> person1.foo3.call(person2)() // window
+> person1.foo3().call(person2) // person2
+> 
+> person1.foo4()() // person1
+> // foo4调用时绑定了person2，返回的函数是箭头函数，调用时，找到了上层绑定的person2
+> person1.foo4.call(person2)() // window x person2
+> person1.foo4().call(person2) // person1
+> ```
+>
+> ```js
+> var name = 'window'
+> function Person (name) {
+>   this.name = name
+>   this.obj = {
+>     name: 'obj',
+>     foo1: function () {
+>       return function () {
+>         console.log(this.name)
+>       }
+>     },
+>     foo2: function () {
+>       return () => {
+>         console.log(this.name)
+>       }
+>     }
+>   }
+> }
+> var person1 = new Person('person1')
+> var person2 = new Person('person2')
+> 
+> // obj.foo1()返回一个函数
+> // 这个函数在全局作用于下直接执行（默认绑定）
+> person1.obj.foo1()() // obj | person1 x window
+> person1.obj.foo1.call(person2)() // window
+> person1.obj.foo1().call(person2) // person2
+> 
+> // 拿到foo2()的返回值，是一个箭头函数
+> // 箭头函数在执行时找上层作用域下的this，就是obj
+> person1.obj.foo2()() // obj | person1 -> obj
+> // foo2()的返回值，依然是箭头函数，但是在执行foo2时绑定了person2
+> // 箭头函数在执行时找上层作用域下的this，找到的是person2
+> person1.obj.foo2.call(person2)() // person1 x person2
+> // 箭头函数通过call调用是不会绑定this，所以找上层作用域下的this是obj
+> person1.obj.foo2().call(person2) // person1 x obj
+> ```
+
+**小结**：this的四种绑定规则
+
+1. 默认规则绑定（全局window）
+2. 隐式绑定（谁调用就是绑定谁）
+3. 显示绑定（call、bind、apply）
+4. new绑定
+
+以上优先级从高到低为 4-3-2-1
+
+---
+
+## @click="btnClick"，怎么做绑定的？（源码解析）
+
+![image-20230713162652956](note.assets/image-20230713162652956.png)
+
+绑定的大致思路（详情看视频第二集36min-38min有介绍）：通过循环（for...in）methods，判断是否有该方法，有的话通过bind函数绑定this存储到ctx[key]（这个是存储方法的，例如btnClick），publicThis指向的是我们组件实例的代理proxy对象（见下图（这个在后面响应式原理会讲到））
+
+![image-20230713171542093](note.assets/image-20230713171542093.png)
+
+![image-20230713171626313](note.assets/image-20230713171626313.png)
+
+## template解析方法（后面详讲）
+
+有两种，在vue源码内解析和vue-template-compiler（vue插件）解析
+
+`instance.proxy"!"`，这是ts的语法，表示断言
+
+proxy是es6新出的
+
+## VSCode代码片段
 
