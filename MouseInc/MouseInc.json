@@ -706,7 +706,7 @@
 			["Execute", "Calc"]
 		],
 		"Name": "打开计算器",
-		"Sign": "C",
+		"Sign": "O",
 		"Valid": true
 	}, {
 		"Actions": [
@@ -730,12 +730,10 @@
 		"Sign": "W",
 		"Valid": true
 	}, {
-		"Actions": [
-			["Internal", "Exclude"]
-		],
-		"Name": "排除当前程序",
+		"Actions": [],
+		"Name": "test",
 		"Sign": "Z",
-		"Valid": true
+		"Valid": false
 	}, {
 		"Actions": [
 			["Internal", "Settings"]
@@ -780,12 +778,12 @@
 		"Sign": "LEFT-RIGHT",
 		"Valid": true
 	}, {
-		"Valid": true,
-		"Sign": "O",
-		"Name": "Live Server",
 		"Actions": [
 			["SendKeys", "Alt+L+O"]
-		]
+		],
+		"Name": "Live Server",
+		"Sign": "C",
+		"Valid": true
 	}],
 	"MouseGesture": {
 		"AddMode": false,
