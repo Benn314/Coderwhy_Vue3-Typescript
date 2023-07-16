@@ -456,4 +456,41 @@ React是这么来写的
 
 绑定的组件标签只渲染一次（包含其所有子组件，都不会重新渲染）
 
-![image-20230714205952468](note.assets/image-20230714205952468.png)
+![image-20230716114808537](note.assets/image-20230716114808537.png)
+
+## v-text
+
+v-text等价于用{{}} 文本插值，但是文本插值还可以用表达式表示，所以一般开发里都会使用mustache语法（也就是文本插值的方式）
+
+```html
+  <body>
+    <div id="app"></div>
+
+    <template id="my-app">
+      <div>
+        <!-- 以下两种写法等价 -->
+        <h2>{{ message }}</h2>
+        <h2 v-text="message"></h2>
+      </div>
+    </template>
+
+    <script src="../js/vue.js"></script>
+    <script>
+      const App = {
+        template: "#my-app",
+        data() {
+          return {
+            message: "hello world!",
+          };
+        },
+      };
+
+      Vue.createApp(App).mount("#app");
+    </script>
+  </body>
+```
+
+​	
+
+## v-html
+
