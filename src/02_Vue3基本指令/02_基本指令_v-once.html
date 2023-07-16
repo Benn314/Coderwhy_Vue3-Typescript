@@ -10,13 +10,10 @@
 
     <template id="my-app">
       <div>
-        <!-- 表达式太长就定义成methods方法 -->
-        <h2>{{ message.split('').reverse().join('') }}</h2>
+        <h2>{{ counter }}</h2>
+        <h2 v-once>{{ counter }}</h2>
       </div>
-
-      <!-- 错误用法 插值表达式只适合属性和表达式，不适合语句，无论什么语句，例如定义语句、判断语句-->
-      <!-- <h2>{{ var name="abc" }}</h2> -->
-      <!-- <h2>{{ if(isShow) { return '哈哈哈'} }}}</h2> -->
+      <button @click="increment">+1</button>
     </template>
 
     <script src="../js/vue.js"></script>
@@ -25,8 +22,13 @@
         template: "#my-app",
         data() {
           return {
-            message: "hello world!",
+            counter: 10,
           };
+        },
+        methods: {
+          increment() {
+            this.counter++;
+          }
         },
       };
 
