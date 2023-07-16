@@ -26,9 +26,73 @@ Angular入门门槛高，设计思想与node框架nest.js相似，而且都是�
 
 ![image-20230710175508204](note.assets/image-20230710175508204.png)
 
+01_Vue3的引入.html
+
+```html
+<!-- CDN引入 -->
+<body>
+  <div id="app"></div>
+  <script src="https://unpkg.com/vue@next"></script>
+  <script>
+    const why = {
+      template: `<h2>Hello World!</h2>`,
+    }
+    const app = Vue.createApp(why);
+    app.mount('#app');
+  </script>
+</body>
+```
+
+02_Vue3的引入.html
+
+```html
+<!-- 下载打包文件到本地并引入 -->
+<body>
+  <div id="app"></div>
+  <script src='../js/vue.js'></script>
+  <script>
+    Vue.createApp({
+      template:'<h2>Hello World!!!</h2>'
+    }).mount('#app');
+  </script>
+</body>
+```
+
+​	
+
 ## 计数器案例（原生 & Vue 实现）
 
 ![image-20230711093536207](note.assets/image-20230711093536207.png)
+
+03_计数器案例-原生.html
+
+```html
+<body>
+  <h2 class="counter">0</h2>
+  <button class="increment">+1</button>
+  <button class="decrement">-1</button>
+
+  <script>
+    const counterEl = document.querySelector('.counter');
+    const increment = document.querySelector('.increment');
+    const decrement = document.querySelector('.decrement');
+
+    let count= 100;
+    counterEl.innerHTML=count;
+
+    increment.addEventListener('click',()=>{
+      count++;
+      counterEl.innerHTML=count;
+    })
+
+    decrement.addEventListener('click',()=>{
+      count--;
+      counterEl.innerHTML=count;
+    })
+  </script>
+</body>
+```
+
 
 > 挂载元素后面可以配置代码片段来快速生成
 
@@ -37,6 +101,45 @@ Angular入门门槛高，设计思想与node框架nest.js相似，而且都是�
 在template中，vue3最外层给不给div标签都可以，vue2是要的
 
 > 暂时不清楚上图说的另一方式编写有提示指的是什么（答：在template标签进行）
+
+04_计数器案例-Vue.html
+
+```html
+<body>
+  <div id="app"></div>
+  <script src="../js/vue.js"></script>
+  <script>
+    Vue.createApp({
+      // 在template中需要使用元素标签多的情况可以使用模板字符串，比普通单/双字符串方便
+      template: `
+        <div>
+          <h2>{{message}}</h2>
+          <h2>{{count}}</h2>
+          <button @click='increment'>+1</button>
+          <button @click='decrement'>-1</button>  
+        </div>
+      `,
+      // 在vue2中，data是一个对象，但在vue3中，data是一个函数，我们一般是return一个对象
+      // vue使得我们不需要再去进行原生dom绑定，data里返回的属性都会被加入响应式系统中，可以在模板中使用
+      data: function(){
+        return {
+          message:'hello',
+          count: 100
+        }
+      },
+      methods:{
+        increment(){
+          // this拿的其实是proxy代理里的东西，再去获取到data里的属性count（答：这一部分是被Vue的响应式系统劫持）
+          this.count++;
+        },
+        decrement(){
+          this.count--;
+        }
+      }
+    }).mount('#app')
+  </script>
+</body>
+```
 
 ​	
 
@@ -89,6 +192,43 @@ template标签不是vue特有的，html标签本身就有定义这个template标
 
 虽然解析器在加载页面时确实会处理 **`<template>`** 元素的内容，但这样做只是为了确保这些内容有效；但元素内容不会被渲染。——MDN
 
+05_template写法一.html
+
+```html
+<body>
+  <div id="app"></div>
+  <script src="../js/vue.js"></script>
+  <script type="x-template" id="counter">
+    <!-- 缺点是没有高亮 -->
+    <div>
+      <h2>{{ message }}</h2>
+      <h2>{{ count }}</h2>
+      <button @click='increment'>+1</button>
+      <button @click='decrement'>-1</button>  
+    </div>
+  </script>
+  <script>
+    Vue.createApp({
+      template: '#counter',
+      data: function(){
+        return {
+          message:'hello',
+          count: 100
+        }
+      },
+      methods:{
+        increment(){
+          this.count++;
+        },
+        decrement(){
+          this.count--;
+        }
+      }
+    }).mount('#app')
+  </script>
+</body>
+```
+
 ---
 
 ![image-20230711111112616](note.assets/image-20230711111112616.png)
@@ -100,6 +240,137 @@ template标签不是vue特有的，html标签本身就有定义这个template标
 > 上面刚刚已经说明了原因，template标签是不会被浏览器渲染（看上面写的[[note#^00ee8c | template作用]]）
 
 ![image-20230711111937205](note.assets/image-20230711111937205.png)
+
+06_template写法二.html
+
+```html
+  <body>
+    <div id="app">写在#app的这一部分内容会被template标签的内容所替换</div>
+
+    <!-- 只显示Vue处理后的标签内容 -->
+    <template id="counter">
+      <div>
+        <h2>{{ message }}</h2>
+        <h2>{{ count }}</h2>
+        <button @click="increment">+1</button>
+        <button @click="decrement">-1</button>
+        <button @click="btnClick">看看this值</button>
+      </div>
+    </template>
+
+    <!-- 显示Vue处理后的标签内容，再显示原生的标签内容 -->
+    <!-- <div id="counter1">
+    <div>
+      <h2>{{ message }}</h2>
+      <h2>{{ count }}</h2>
+      <button @click='increment'>+1</button>
+      <button @click='decrement'>-1</button>  
+    </div>
+  </div> -->
+
+    <script src="../js/vue.js"></script>
+
+    <script>
+      Vue.createApp({
+        template: "#counter",
+        // template: '#counter1',
+        data: function () {
+          return {
+            message: "hello",
+            count: 100,
+          };
+        },
+        methods: {
+          increment() {
+            this.count++;
+          },
+          decrement() {
+            this.count--;
+          },
+          btnClick: () => {
+            // 在这里使用箭头函数打印出来的this是window对象
+            console.log(this);
+          },
+        },
+      }).mount("#app");
+
+      // 下面写的是this指向相关的知识点
+      // const foo = ()=>{
+      //   console.log(this);
+      // }
+      // const foo = function(){
+      //   console.log(this);
+      // }
+
+      // foo(); // window 隐式绑定
+
+      // const obj = {
+      //   bar: foo
+      // }
+
+      // obj.bar();
+
+      // function bar(){
+      //   console.log(this);
+      // }
+
+      // // bar();
+
+      // const info = {
+      //   name:"why"
+      // }
+
+      // // 显示绑定
+      // const foo = bar.bind(info); // bind 不会修改原数据,而是返回一个新的函数
+      // foo();
+
+      // function foo(func) {
+      //   func();
+      // }
+
+      // var obj = {
+      //   name: "why",
+      //   bar: function () {
+      //     console.log(this);
+      //   },
+      // };
+
+      // foo(obj.bar); // window
+      // obj.bar(); // why
+
+      // function foo() {
+      //   console.log(this); // obj对象
+      // }
+
+      // var obj1 = {
+      //   name: "obj1",
+      //   foo: foo,
+      // };
+
+      // var obj2 = {
+      //   name: "obj2",
+      //   obj1: obj1,
+      // };
+
+      // obj2.obj1.foo();
+
+      function foo() {
+        console.log(this);
+      }
+
+      var obj1 = {
+        name: "obj1",
+        foo: foo,
+      };
+
+      // 讲obj1的foo赋值给bar
+      var bar = obj1.foo;
+      bar();
+    </script>
+  </body>
+```
+
+​	
 
 ## methods属性
 
@@ -452,11 +723,83 @@ React是这么来写的
 
 {{}} 叫 文本插值
 
+01_Mustache语法.html
+
+```html
+  <body>
+    <div id="app"></div>
+
+    <template id="my-app">
+      <div>
+        <!-- 表达式太长就定义成methods方法 -->
+        <h2>{{ message.split('').reverse().join('') }}</h2>
+      </div>
+
+      <!-- 错误用法 插值表达式只适合属性和表达式，不适合语句，无论什么语句，例如定义语句、判断语句-->
+      <!-- <h2>{{ var name="abc" }}</h2> -->
+      <!-- <h2>{{ if(isShow) { return '哈哈哈'} }}}</h2> -->
+    </template>
+
+    <script src="../js/vue.js"></script>
+    <script>
+      const App = {
+        template: "#my-app",
+        data() {
+          return {
+            message: "hello world!",
+          };
+        },
+      };
+
+      Vue.createApp(App).mount("#app");
+    </script>
+  </body>
+```
+
+​	
+
 ### v-once
 
 绑定的组件标签只渲染一次（包含其所有子组件，都不会重新渲染）
 
 ![image-20230716114808537](note.assets/image-20230716114808537.png)
+
+02_基本指令_v-once.html
+
+```html
+  <body>
+    <div id="app"></div>
+
+    <template id="my-app">
+      <div>
+        <h2>{{ counter }}</h2>
+        <h2 v-once>{{ counter }}</h2>
+      </div>
+      <button @click="increment">+1</button>
+    </template>
+
+    <script src="../js/vue.js"></script>
+    <script>
+      const App = {
+        template: "#my-app",
+        data() {
+          return {
+            counter: 10,
+          };
+        },
+        methods: {
+          increment() {
+            this.counter++;
+          }
+        },
+      };
+
+      Vue.createApp(App).mount("#app");
+    </script>
+  </body>
+```
+
+​	
 
 ## v-text
 
@@ -493,4 +836,32 @@ v-text等价于用{{}} 文本插值，但是文本插值还可以用表达式表
 ​	
 
 ## v-html
+
+04_基本指令_v-html.html
+
+```html
+  <body>
+    <div id="app"></div>
+
+    <template id="my-app">
+      <div>{{msg}}</div>
+      <div v-html="msg"></div>
+    </template>
+
+    <script src="../js/vue.js"></script>
+    <script>
+      const App = {
+        template: "#my-app",
+        data() {
+          return {
+            msg: '<span style="color:green; background-color:yellow">哈哈哈</span>',
+          };
+        },
+      };
+
+      Vue.createApp(App).mount("#app");
+    </script>
+  </body>
+
+```
 
