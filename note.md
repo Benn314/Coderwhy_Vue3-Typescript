@@ -946,7 +946,7 @@ options API 会逐渐被 component API 替代
 
 ​	
 
-### v-bind的绑定属性
+### v-bind
 
 ![image-20230716150042599](note.assets/image-20230716150042599.png)
 
@@ -1123,7 +1123,7 @@ options API 会逐渐被 component API 替代
 
 ​	
 
-### 绑定style介绍
+#### 绑定style
 
 ![image-20230716165416524](note.assets/image-20230716165416524.png)
 
@@ -1273,6 +1273,8 @@ AntDesign Vue 个人维护（一般不太倾向选择个人维护，因为一旦
 
     <template id="my-app">
       <div v-bind="info">哈哈哈</div>
+      <!-- 只用v-bind的时候也可以只使用语法糖: 但不建议，因为这样阅读性比较差 -->
+      <div :="info">哈哈哈</div>
       <!-- 等同于 -->
       <div name="why" age="18" height="1.88">哈哈哈</div>
       <!-- 这个作用很大，之后封装我们的高阶组件的时候会用来相互传递配置信息 -->
@@ -1298,3 +1300,111 @@ AntDesign Vue 个人维护（一般不太倾向选择个人维护，因为一旦
   </body>
 ```
 
+​	
+
+### v-on
+
+![image-20230717193217815](note.assets/image-20230717193217815.png)
+
+08_v-on的基本使用.html
+
+```html
+    <style>
+      .area {
+        width: 200px;
+        height: 200px;
+        background-color: aquamarine;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="app"></div>
+
+    <template id="my-app">
+      <!-- 
+        语法糖：
+        @click -> v-on:click 
+        @mousemove -> v-on:mousemove
+      -->
+      <button @click="btn1Click">按钮1</button>
+      <div class="area" @mousemove="mouseMove">鼠标移动</div>
+      <!-- 绑定一个表达式 inline statement 如果表达式太复杂则定义成方法 -->
+      <button @click="counter++">{{counter}}</button>
+      <!-- 绑定一个对象 -->
+      <div class="area" v-on="{click: btn1Click,mousemove: mouseMove}"></div>
+      <!-- <div class="area" @="{click: btn1Click,mousemove: mouseMove}"></div> -->
+
+    </template>
+
+    <script src="../js/vue.js"></script>
+    <script>
+      const App = {
+        template: "#my-app",
+        data() {
+          return {
+            message: "hello world!",
+            counter: 100
+          };
+        },
+        methods: {
+          btn1Click(){
+            console.log("按钮1发生了点击");
+          },
+          mouseMove(){
+            console.log("鼠标移动");
+          }
+        },
+      };
+
+      Vue.createApp(App).mount("#app");
+    </script>
+  </body>
+```
+
+（DOM）无论拖拽、点击还是鼠标移动事件，浏览器都会都会产生event对象
+
+09_v-on的参数传递.html
+
+```html
+  <body>
+    <div id="app"></div>
+
+    <template id="my-app">
+      <!-- 默认传入event对象 可以在方法中去获取 -->
+      <button @click="btnClick">按钮1</button>
+      <!-- $event 可以获取到事件发生时的事件对象 -->
+      <button @click="btn2Click($event,'coderwhy')">按钮2</button>
+    </template>
+
+    <script src="../js/vue.js"></script>
+    <script>
+      const App = {
+        template: "#my-app",
+        data() {
+          return {
+            message: "hello world!",
+          };
+        },
+        methods: {
+          // 默认vue内部会帮我们绑定event事件，不用我们传参
+          btnClick(event){
+            console.log(event)
+          },
+          btn2Click(event,name){
+            console.log(event,name)
+          }
+        },
+      };
+
+      Vue.createApp(App).mount("#app");
+    </script>
+  </body>
+```
+
+![image-20230717193305690](note.assets/image-20230717193305690.png)
+
+为什么是@click="method1"这么写，而不是@click="method1()"
+
+> 因为我们是在做绑定，而不是调用它执行它，绑定完再通过click点击调用
+
+event（DOM）可以回头看看

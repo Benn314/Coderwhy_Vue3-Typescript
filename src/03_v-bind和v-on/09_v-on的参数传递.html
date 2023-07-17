@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div id="app"></div>
+
+    <template id="my-app">
+      <!-- 默认传入event对象 可以在方法中去获取 -->
+      <button @click="btnClick">按钮1</button>
+      <!-- $event 可以获取到事件发生时的事件对象 -->
+      <button @click="btn2Click($event,'coderwhy')">按钮2</button>
+    </template>
+
+    <script src="../js/vue.js"></script>
+    <script>
+      const App = {
+        template: "#my-app",
+        data() {
+          return {
+            message: "hello world!",
+          };
+        },
+        methods: {
+          // 默认vue内部会帮我们绑定event事件，不用我们传参
+          btnClick(event){
+            console.log(event)
+          },
+          btn2Click(event,name){
+            console.log(event,name)
+          }
+        },
+      };
+
+      Vue.createApp(App).mount("#app");
+    </script>
+  </body>
+</html>

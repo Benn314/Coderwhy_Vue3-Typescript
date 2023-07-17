@@ -9,12 +9,10 @@
     <div id="app"></div>
 
     <template id="my-app">
-      <div v-bind="info">哈哈哈</div>
-      <!-- 只用v-bind的时候也可以只使用语法糖: 但不建议，因为这样阅读性比较差 -->
-      <div :="info">哈哈哈</div>
-      <!-- 等同于 -->
-      <div name="why" age="18" height="1.88">哈哈哈</div>
-      <!-- 这个作用很大，之后封装我们的高阶组件的时候会用来相互传递配置信息 -->
+      <div @click="divClick">
+        <button @click.stop="btnClick">按钮</button>
+      </div>
+      <input type="text" @keyup.enter="enterKeyup" />
     </template>
 
     <script src="../js/vue.js"></script>
@@ -23,12 +21,19 @@
         template: "#my-app",
         data() {
           return {
-            info: {
-              name: "why",
-              age: 18,
-              height: 1.88,
-            },
+            message: "hello world!",
           };
+        },
+        methods: {
+          divClick() {
+            console.log("divClick");
+          },
+          btnClick() {
+            console.log("btnClick");
+          },
+          enterKeyup(event) {
+            console.log("enterKeyup", event.target.value); // event.target.value 拿到输入的value值
+          },
         },
       };
 

@@ -391,7 +391,7 @@
 	"KeySound": false,
 	"KeySoundIndex": 0,
 	"Keycast": {
-		"BackgroundColor": "#353535",
+		"BackgroundColor": "#00BCD4",
 		"Fade": 5,
 		"FontSize": 24,
 		"IgnoreSingle": false,
@@ -566,6 +566,20 @@
 			"Name": "扩展程序",
 			"Sign": "R",
 			"Valid": true
+		}, {
+			"Actions": [
+				["SendKeys", "F12"]
+			],
+			"Name": "打开控制台",
+			"Sign": "DOWN-RIGHT-DOWN",
+			"Valid": true
+		}, {
+			"Valid": true,
+			"Sign": "W",
+			"Name": "console",
+			"Actions": [
+				["SendKeys", "F12"]
+			]
 		}],
 		"Match": ["Chrome.exe"],
 		"Name": "Chrome"
@@ -822,7 +836,7 @@
 			"UpActions": [
 				["SendKeys", "Ctrl+Alt+Shift+Tab"]
 			],
-			"Valid": false
+			"Valid": true
 		},
 		"Left": {
 			"DownActions": [
