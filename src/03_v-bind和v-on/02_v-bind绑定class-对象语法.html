@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      .active {
+        color: red;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="app"></div>
+
+    <template id="my-app">
+      <div :class="className">哈哈哈</div>
+      <!-- 对象语法：{ 'active' : boolean} ''单引号可加可不加（套在key的那个单引号）-->
+      <!-- 同时 对象语法 可以有多个键值对 -->
+      <div :class="{ 'active': isActive, title: true}">鸡毙你！</div>
+      <button @click="toggle">切换</button>
+
+      <!-- 默认的class和动态的class结合 -->
+      <div class="abc cba" :class="{ active: isActive, title: true}">
+        鸡毙你！
+      </div>
+
+      <!-- 将对象放到一个单独的属性中 -->
+      <div class="abc cba" :class="classObj">鸡毙你！</div>
+
+      <!-- 将返回的对象放到methods方法中 -->
+      <div class="abc cba" :class="getClassObj()">鸡毙你！</div>
+
+      <!-- 将返回的对象放到计算属性中 -->
+      
+    </template>
+
+    <script src="../js/vue.js"></script>
+    <script>
+      const App = {
+        template: "#my-app",
+        data() {
+          return {
+            className: "why",
+            isActive: true,
+            title: "abc",
+            classObj: {
+              // 注意，这里data里的属性（例如对象类型），不允许引用data的其他属性，不然响应式可能会出错
+              active: true, // 像这里的话，不能引用isActive，所以我们要重新写个
+              title: true,
+            },
+          };
+        },
+        methods: {
+          toggle() {
+            this.isActive = !this.isActive;
+          },
+          getClassObj() {
+            return {
+              active: true,
+              title: true,
+            };
+          },
+        },
+      };
+
+      Vue.createApp(App).mount("#app");
+    </script>
+  </body>
+</html>

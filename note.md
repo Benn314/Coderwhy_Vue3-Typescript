@@ -758,7 +758,7 @@ React是这么来写的
 
 ​	
 
-### v-once
+### v-once（不常见）
 
 绑定的组件标签只渲染一次（包含其所有子组件，都不会重新渲染）
 
@@ -801,7 +801,7 @@ React是这么来写的
 
 ​	
 
-## v-text
+v-text
 
 v-text等价于用{{}} 文本插值，但是文本插值还可以用表达式表示，所以一般开发里都会使用mustache语法（也就是文本插值的方式）
 
@@ -835,7 +835,7 @@ v-text等价于用{{}} 文本插值，但是文本插值还可以用表达式表
 
 ​	
 
-## v-html
+### v-html（不常见）
 
 04_基本指令_v-html.html
 
@@ -867,5 +867,434 @@ v-text等价于用{{}} 文本插值，但是文本插值还可以用表达式表
 
 ​	
 
-## v-pre
+### v-pre（不常见）
+
+![image-20230716125646589](note.assets/image-20230716125646589.png)
+
+```html
+  <body>
+    <div id="app"></div>
+
+    <template id="my-app">
+      <div>
+        <h2 v-pre>{{ message }}</h2>
+      </div>
+    </template>
+
+    <script src="../js/vue.js"></script>
+    <script>
+      const App = {
+        template: "#my-app",
+        data() {
+          return {
+            message: "hello world!",
+          };
+        },
+      };
+
+      Vue.createApp(App).mount("#app");
+    </script>
+  </body>
+```
+
+v-pre在vue编译阶段会自己执行
+
+​	
+
+### v-cloak（不常见）
+
+![image-20230716130731948](note.assets/image-20230716130731948.png)
+
+06_基本指令_v-cloak.html
+
+```html
+    <style>
+      [v-cloak] {
+        display: none;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div id="app"></div>
+
+    <template id="my-app">
+      <div>
+        <h2 v-cloak>{{ message }}</h2>
+      </div>
+    </template>
+
+    <script src="../js/vue.js"></script>
+    <script>
+      const App = {
+        template: "#my-app",
+        data() {
+          return {
+            message: "hello world!",
+          };
+        },
+      };
+
+      Vue.createApp(App).mount("#app");
+    </script>
+  </body>
+```
+
+options API 会逐渐被 component API 替代
+
+因为vue3 对 vue2做了兼容，所以vue2项目升级vue3没有太多改变的地方
+
+​	
+
+### v-bind的绑定属性
+
+![image-20230716150042599](note.assets/image-20230716150042599.png)
+
+#### 绑定基本属性
+
+![image-20230716151000083](note.assets/image-20230716151000083.png)
+
+绑定的属性来自data()
+
+01_v-bind的基本使用.html
+
+```html
+<body>
+    <div id="app"></div>
+
+    <!-- vue2 template模板中只能有一个根元素 -->
+    <!-- vue3 是允许template中有多个根元素 -->
+    <template id="my-app">
+      <img :src="imgUrl" alt="图片" />
+      <!-- 不写:语法糖，就只是普通字符串，不会解析变量属性 -->
+      <img src="imgUrl" alt="图片" />
+      <a v-bind:href="link">github</a>
+    </template>
+
+    <script src="../js/vue.js"></script>
+    <script>
+      const App = {
+        template: "#my-app",
+        data() {
+          return {
+            imgUrl: "https://avatars.githubusercontent.com/u/70643377?v=4",
+            link: "https://github.com/Benn314/Coderwhy_Vue3-Typescript/blob/main/note.md",
+          };
+        },
+      };
+
+      Vue.createApp(App).mount("#app");
+    </script>
+  </body>
+```
+
+#### 绑定class介绍
+
+![image-20230716165206513](note.assets/image-20230716165206513.png)
+
+支持以下两种类型
+
+- 对象语法
+  - 多个键值对
+  - 默认的class和动态的class结合
+  - 将对象放到一个单独的属性中
+  - 将返回的对象放到methods方法中
+  - 将返回的对象放到计算属性中
+- 数组语法
+  - 字符串
+  - data属性
+  - 三元运算符
+  - 对象语法
+
+```html
+<!-- 对象语法：{ 'active' : boolean} ''单引号可加可不加（套在key的那个单引号）-->
+<div :class="{ 'active': isActive, title: true}">鸡毙你！</div>
+```
+
+![image-20230716162259370](note.assets/image-20230716162259370.png)
+
+```html
+<!-- 默认的class和动态的class结合 -->
+<div class="abc cba" :class="{ active: isActive, title: true}">鸡毙你！</div>
+```
+
+![image-20230716162708438](note.assets/image-20230716162708438.png)
+
+02_v-bind绑定class-对象语法.html
+
+```html
+    <style>
+      .active {
+        color: red;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="app"></div>
+
+    <template id="my-app">
+      <div :class="className">哈哈哈</div>
+      <!-- 对象语法：{ 'active' : boolean} ''单引号可加可不加（套在key的那个单引号）-->
+      <!-- 同时 对象语法 可以有多个键值对 -->
+      <div :class="{ 'active': isActive, title: true}">鸡毙你！</div>
+      <button @click="toggle">切换</button>
+
+      <!-- 默认的class和动态的class结合 -->
+      <div class="abc cba" :class="{ active: isActive, title: true}">
+        鸡毙你！
+      </div>
+
+      <!-- 将对象放到一个单独的属性中 -->
+      <div class="abc cba" :class="classObj">鸡毙你！</div>
+
+      <!-- 将返回的对象放到methods方法中 -->
+      <div class="abc cba" :class="getClassObj()">鸡毙你！</div>
+
+      <!-- 将返回的对象放到计算属性中 -->
+      
+    </template>
+
+    <script src="../js/vue.js"></script>
+    <script>
+      const App = {
+        template: "#my-app",
+        data() {
+          return {
+            className: "why",
+            isActive: true,
+            title: "abc",
+            classObj: {
+              // 注意，这里data里的属性（例如对象类型），不允许引用data的其他属性，不然响应式可能会出错
+              active: true, // 像这里的话，不能引用isActive，所以我们要重新写个
+              title: true,
+            },
+          };
+        },
+        methods: {
+          toggle() {
+            this.isActive = !this.isActive;
+          },
+          getClassObj() {
+            return {
+              active: true,
+              title: true,
+            };
+          },
+        },
+      };
+
+      Vue.createApp(App).mount("#app");
+    </script>
+  </body>
+
+```
+
+03_v-bind绑定class-数组语法.html
+
+```html
+  <body>
+    <div id="app"></div>
+
+    <template id="my-app">
+      <!-- :class 以数组的方式存储属性，最后合并到class属性中 -->
+      <div :class="['abc',title]">哈哈哈哈</div>
+      <!-- :class数组中支持三元运算符和对象语法 -->
+      <div :class="['abc', title, isActive ? 'active' : '', {act: isActive}]">哈哈哈哈</div>
+    </template>
+
+    <script src="../js/vue.js"></script>
+    <script>
+      const App = {
+        template: "#my-app",
+        data() {
+          return {
+            message: "hello world!",
+            title: "cba",
+            isActive: true,
+          };
+        },
+      };
+
+      Vue.createApp(App).mount("#app");
+    </script>
+  </body>
+
+```
+
+​	
+
+### 绑定style介绍
+
+![image-20230716165416524](note.assets/image-20230716165416524.png)
+
+04_v-bind绑定style-对象语法.html
+
+```html
+  <body>
+    <div id="app"></div>
+
+    <template id="my-app">
+      <div style="color: aquamarine">hello world!</div>
+      <!-- 这里color值不加单引号单成变量来处理，如果你是想加一个确切的值，就加上单引号 -->
+      <div :style="{color: 'aquamarine'}">hello world!</div>
+      <div :style="{color: finalColor}">hello world!</div>
+
+      <!-- 采用短横线分割的方式，需要用引号括起来 -->
+      <div :style="{color: finalColor,'font-size': '20px'}">hello world!</div>
+      <!-- 驼峰式可括可不括 效果一样 -->
+      <div :style="{color: finalColor,fontSize: '20px'}">hello world!</div>
+      <!-- 可拼接 -->
+      <div :style="{color: finalColor,fontSize: finalFontSize+'px'}">
+        hello world!
+      </div>
+      <!-- 直接绑定一个data对象 -->
+      <div :style="finalStyleObj">hello world!</div>
+
+      <!-- 直接绑定methods -->
+      <div :style="getFinalStyleObj()">hello world!</div>
+    </template>
+
+    <script src="../js/vue.js"></script>
+    <script>
+      const App = {
+        template: "#my-app",
+        data() {
+          return {
+            message: "hello world!",
+            finalColor: "aquamarine",
+            finalFontSize: 50,
+            finalStyleObj: {
+              fontSize: "50px",
+              'font-weight': 700, // 用短横线用驼峰都可以，习惯用驼峰
+              backgroundColor: "red",
+            },
+          };
+        },
+        methods: {
+          getFinalStyleObj(){
+            return {
+              fontSize: "50px",
+              'font-weight': 700, // 用短横线用驼峰都可以，习惯用驼峰
+              backgroundColor: "red",
+            }
+            // return this.finalStyleObj
+          }
+        },
+      };
+
+      Vue.createApp(App).mount("#app");
+    </script>
+  </body>
+
+```
+
+05_v-bind绑定style-数组语法.html
+
+```html
+  <body>
+    <div id="app"></div>
+
+    <template id="my-app">
+      <div :style="[style1Obj, style2Obj]">
+        hello
+      </div>
+    </template>
+
+    <script src="../js/vue.js"></script>
+    <script>
+      const App = {
+        template: "#my-app",
+        data() {
+          return {
+            message: "hello world!",
+            style1Obj:{
+              color:'red',
+              fontSize:'50px'
+            },
+            style2Obj:{
+              textDecoration:'underline',
+            }
+          };
+        },
+      };
+
+      Vue.createApp(App).mount("#app");
+    </script>
+  </body>
+
+```
+
+#### 动态绑定属性
+
+![image-20230716173412545](note.assets/image-20230716173412545.png)
+
+06_v-bind动态绑定属性名称.html
+
+```html
+  <body>
+    <div id="app"></div>
+
+    <template id="my-app">
+      <div :[name]="value">哈哈哈</div>
+    </template>
+
+    <script src="../js/vue.js"></script>
+    <script>
+      const App = {
+        template: "#my-app",
+        data() {
+          return {
+            name: "cba",
+            value: "kobe",
+          };
+        },
+      };
+
+      Vue.createApp(App).mount("#app");
+    </script>
+  </body>
+```
+
+![image-20230716173551199](note.assets/image-20230716173551199.png)
+
+![image-20230716174323644](note.assets/image-20230716174323644.png)
+
+Element Plus 饿了么团队维护
+
+AntDesign 蚂蚁金服团队维护
+
+AntDesign Vue 个人维护（一般不太倾向选择个人维护，因为一旦个人停止维护，很容易出bug，不过，以上三者都很优秀）
+
+**07_v-bind属性直接绑定一个对象.html**
+
+```html
+  <body>
+    <div id="app"></div>
+
+    <template id="my-app">
+      <div v-bind="info">哈哈哈</div>
+      <!-- 等同于 -->
+      <div name="why" age="18" height="1.88">哈哈哈</div>
+      <!-- 这个作用很大，之后封装我们的高阶组件的时候会用来相互传递配置信息 -->
+    </template>
+
+    <script src="../js/vue.js"></script>
+    <script>
+      const App = {
+        template: "#my-app",
+        data() {
+          return {
+            info: {
+              name: "why",
+              age: 18,
+              height: 1.88,
+            },
+          };
+        },
+      };
+
+      Vue.createApp(App).mount("#app");
+    </script>
+  </body>
+```
 

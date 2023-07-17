@@ -5,14 +5,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
   </head>
-
   <body>
     <div id="app"></div>
 
     <template id="my-app">
-      <div>
-        <h2 v-pre>{{ message }}</h2>
-      </div>
+      <!-- :class 以数组的方式存储属性，最后合并到class属性中 -->
+      <div :class="['abc',title]">哈哈哈哈</div>
+      <!-- :class数组中支持三元运算符和对象语法 -->
+      <div :class="['abc', title, isActive ? 'active' : '', {act: isActive}]">哈哈哈哈</div>
     </template>
 
     <script src="../js/vue.js"></script>
@@ -22,6 +22,8 @@
         data() {
           return {
             message: "hello world!",
+            title: "cba",
+            isActive: true,
           };
         },
       };

@@ -4,6 +4,11 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
+    <style>
+      [v-cloak] {
+        display: none;
+      }
+    </style>
   </head>
 
   <body>
@@ -11,7 +16,7 @@
 
     <template id="my-app">
       <div>
-        <h2 v-pre>{{ message }}</h2>
+        <h2 v-cloak>{{ message }}</h2>
       </div>
     </template>
 

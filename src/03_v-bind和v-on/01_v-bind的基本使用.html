@@ -5,14 +5,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
   </head>
-
   <body>
     <div id="app"></div>
 
+    <!-- vue2 template模板中只能有一个根元素 -->
+    <!-- vue3 是允许template中有多个根元素 -->
     <template id="my-app">
-      <div>
-        <h2 v-pre>{{ message }}</h2>
-      </div>
+      <img :src="imgUrl" alt="图片" />
+      <!-- 不写:语法糖，就只是普通字符串，不会解析变量属性 -->
+      <img src="imgUrl" alt="图片" />
+      <a v-bind:href="link">github</a>
     </template>
 
     <script src="../js/vue.js"></script>
@@ -21,7 +23,8 @@
         template: "#my-app",
         data() {
           return {
-            message: "hello world!",
+            imgUrl: "https://avatars.githubusercontent.com/u/70643377?v=4",
+            link: "https://github.com/Benn314/Coderwhy_Vue3-Typescript/blob/main/note.md",
           };
         },
       };

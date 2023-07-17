@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div id="app"></div>
+
+    <template id="my-app">
+      <div style="color: aquamarine">hello world!</div>
+      <!-- 这里color值不加单引号单成变量来处理，如果你是想加一个确切的值，就加上单引号 -->
+      <div :style="{color: 'aquamarine'}">hello world!</div>
+      <div :style="{color: finalColor}">hello world!</div>
+
+      <!-- 采用短横线分割的方式，需要用引号括起来 -->
+      <div :style="{color: finalColor,'font-size': '20px'}">hello world!</div>
+      <!-- 驼峰式可括可不括 效果一样 -->
+      <div :style="{color: finalColor,fontSize: '20px'}">hello world!</div>
+      <!-- 可拼接 -->
+      <div :style="{color: finalColor,fontSize: finalFontSize+'px'}">
+        hello world!
+      </div>
+      <!-- 直接绑定一个data对象 -->
+      <div :style="finalStyleObj">hello world!</div>
+
+      <!-- 直接绑定methods -->
+      <div :style="getFinalStyleObj()">hello world!</div>
+    </template>
+
+    <script src="../js/vue.js"></script>
+    <script>
+      const App = {
+        template: "#my-app",
+        data() {
+          return {
+            message: "hello world!",
+            finalColor: "aquamarine",
+            finalFontSize: 50,
+            finalStyleObj: {
+              fontSize: "50px",
+              'font-weight': 700, // 用短横线用驼峰都可以，习惯用驼峰
+              backgroundColor: "red",
+            },
+          };
+        },
+        methods: {
+          getFinalStyleObj(){
+            return {
+              fontSize: "50px",
+              'font-weight': 700, // 用短横线用驼峰都可以，习惯用驼峰
+              backgroundColor: "red",
+            }
+            // return this.finalStyleObj
+          }
+        },
+      };
+
+      Vue.createApp(App).mount("#app");
+    </script>
+  </body>
+</html>
