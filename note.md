@@ -435,7 +435,7 @@ sourcemap有代码映射作用，映射vue.global.js 文件的目标代码具体
 
 ​	
 
-# 02-Vue3模板语法
+# 02-Vue基础-模板语法（一）
 
 ## 上节课后题
 
@@ -1408,3 +1408,168 @@ AntDesign Vue 个人维护（一般不太倾向选择个人维护，因为一旦
 > 因为我们是在做绑定，而不是调用它执行它，绑定完再通过click点击调用
 
 event（DOM）可以回头看看
+
+10_v-on的修饰符.html
+
+```html
+  <body>
+    <div id="app"></div>
+
+    <template id="my-app">
+      <div @click="divClick">
+        <button @click.stop="btnClick">按钮</button>
+      </div>
+      <input type="text" @keyup.enter="enterKeyup" />
+    </template>
+
+    <script src="../js/vue.js"></script>
+    <script>
+      const App = {
+        template: "#my-app",
+        data() {
+          return {
+            message: "hello world!",
+          };
+        },
+        methods: {
+          divClick() {
+            console.log("divClick");
+          },
+          btnClick() {
+            console.log("btnClick");
+          },
+          enterKeyup(event) {
+            console.log("enterKeyup", event.target.value); // event.target.value 拿到输入的value值
+          },
+        },
+      };
+
+      Vue.createApp(App).mount("#app");
+    </script>
+  </body>
+```
+
+​	
+
+# 03-Vue基础-模板语法（二）
+
+## 条件渲染
+
+### v-if 基本使用
+
+![image-20230718163204602](note.assets/image-20230718163204602.png)
+
+01_条件渲染的基本使用.html
+
+```html
+  <body>
+    <div id="app"></div>
+
+    <template id="my-app">
+      <div>
+        <h2 v-if="isShow">{{ message }}</h2>
+        <button @click="toggle">切换</button>
+      </div>
+    </template>
+
+    <script src="../js/vue.js"></script>
+    <script>
+      const App = {
+        template: "#my-app",
+        data() {
+          return {
+            message: "hello world!",
+            isShow:true
+          };
+        },
+        methods: {
+          toggle() {
+            this.isShow = !this.isShow
+          }
+        },
+      };
+
+      Vue.createApp(App).mount("#app");
+    </script>
+  </body>
+```
+
+![image-20230718163503584](note.assets/image-20230718163503584.png)
+
+02_多个条件的渲染.html
+
+```html
+  <body>
+    <div id="app"></div>
+
+    <template id="my-app">
+      <div>
+        <input type="text" v-model="score"/>
+        <h2 v-if="score>90">优秀</h2>
+        <h2 v-else-if="score>60">良好</h2>
+        <h2 v-else>不及格</h2>
+      </div>
+    </template>
+
+    <script src="../js/vue.js"></script>
+    <script>
+      const App = {
+        template: "#my-app",
+        data() {
+          return {
+            message: "hello world!",
+            score: 90,
+          };
+        },
+      };
+
+      Vue.createApp(App).mount("#app");
+    </script>
+  </body>
+```
+
+#### 结合template
+
+v-if指令需要绑定在元素标签上，有时候我们并不想多创建一个div元素，因为他会渲染到我们的页面，这时候我们可以使用template元素标签，因为他不会渲染到页面，但同时会执行
+
+03_template和v-if结合使用.html
+
+```html
+  <body>
+    <div id="app"></div>
+
+    <template id="my-app">
+      <!-- template标签没写指令的话，在页面根本看到里面写的内容 -->
+      <template v-if="isShow1">
+        <h2>111111</h2>
+        <h2>111111</h2>
+        <h2>111111</h2>
+      </template>
+
+      <template v-else>
+        <h2>222222</h2>
+        <h2>222222</h2>
+        <h2>222222</h2>
+      </template>
+    </template>
+
+    <script src="../js/vue.js"></script>
+    <script>
+      const App = {
+        template: "#my-app",
+        data() {
+          return {
+            isShow1: true,
+          };
+        },
+      };
+
+      Vue.createApp(App).mount("#app");
+    </script>
+  </body>
+```
+
+​	
+
+### v-show
+

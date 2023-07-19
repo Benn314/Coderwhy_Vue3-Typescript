@@ -38,6 +38,13 @@
       };
 
       Vue.createApp(App).mount("#app");
+
+      let displayMarketList = [2, 0, 0, 5, 2, 0, 4, 4];
+      displayMarketList = displayMarketList.sort((a, b) => {
+        console.log('displayMarketList: ', displayMarketList)
+        return a - b;
+      });
+      console.log("displayMarketList: ", displayMarketList); // displayMarketList:  (8) [0, 0, 0, 2, 2, 4, 4, 5]
     </script>
   </body>
 </html>
