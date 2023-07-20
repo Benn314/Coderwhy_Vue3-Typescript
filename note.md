@@ -1573,3 +1573,92 @@ v-if指令需要绑定在元素标签上，有时候我们并不想多创建一�
 
 ### v-show
 
+![image-20230719200617733](note.assets/image-20230719200617733.png)
+
+05_v-if和v-show的区别.html
+
+```html
+  <body>
+    <div id="app"></div>
+
+    <template id="my-app">
+      <!-- v-if -->
+      <h2 v-if="isShow">1111</h2>
+      <!-- display:none -->
+      <h2 v-show="isShow">2222</h2>
+    </template>
+
+    <script src="../js/vue.js"></script>
+    <script>
+      const App = {
+        template: "#my-app",
+        data() {
+          return {
+            isShow: false,
+          };
+        },
+      };
+
+      Vue.createApp(App).mount("#app");
+    </script>
+  </body>
+```
+
+​	
+
+## 列表渲染
+
+![image-20230719203042793](note.assets/image-20230719203042793.png)
+
+### 基本使用
+
+01_v-for的基本使用.html
+
+```html
+  <body>
+    <div id="app"></div>
+
+    <template id="my-app">
+      <h2>电影列表</h2>
+      <ul>
+        <!-- 遍历数组 不加括号也可以，但可读性差 -->
+        <li v-for="(item,index) in movies" :key="item">
+          {{index+1}}.{{ item }}
+        </li>
+      </ul>
+      <h2>个人信息</h2>
+      <ul>
+        <!-- 遍历对象 不加括号也可以，但可读性差 -->
+        <li v-for="(value,key,index) in info">{{key}}-{{value}}-{{index}}</li>
+      </ul>
+      <h2>遍历数字</h2>
+      <ul>
+        <!-- 从1开始 不加括号也可以，但可读性差 -->
+        <li v-for="(num,index) in 10">{{num}}-{{index}}</li>
+      </ul>
+    </template>
+
+    <script src="../js/vue.js"></script>
+    <script>
+      const App = {
+        template: "#my-app",
+        data() {
+          return {
+            movies: ["星际穿越", "盗梦空间", "西游记", "功夫瑜伽", "功夫瑜伽2"],
+            info: {
+              name: '凌云木',
+              age: 18,
+              height: 185,
+            },
+          };
+        },
+      };
+
+      Vue.createApp(App).mount("#app");
+    </script>
+  </body>
+```
+
+
+
+### 结合template
