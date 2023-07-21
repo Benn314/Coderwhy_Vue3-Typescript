@@ -13,8 +13,9 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "note.md",
-                "mode": "preview",
+                "file": "Obsidian.md",
+                "mode": "source",
+                "backlinks": true,
                 "source": false
               }
             }
@@ -65,8 +66,7 @@
               "state": {}
             }
           }
-        ],
-        "currentTab": 2
+        ]
       }
     ],
     "direction": "horizontal",
@@ -86,7 +86,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "note.md",
+                "file": "Obsidian.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -103,7 +103,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "note.md",
+                "file": "Obsidian.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -126,7 +126,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "note.md"
+                "file": "Obsidian.md"
               }
             }
           }
@@ -144,37 +144,45 @@
       "canvas:新建白板": false,
       "daily-notes:打开/创建今天的日记": false,
       "templates:插入模板": false,
-      "command-palette:打开命令面板": false
+      "command-palette:打开命令面板": false,
+      "obsidian-hypothesis-plugin:Sync your hypothesis highlights": false,
+      "obsidian-weread-plugin:Weread": false,
+      "obsidian-excalidraw-plugin:新建 Excalidraw 绘图": false
     }
   },
   "active": "260dc2d5e08176d1",
   "lastOpenFiles": [
-    "学习日报/7月20日.md.baiduyun.uploading.cfg",
-    "aText同步/AutoBackup-2023-07-20-14-13-28.atext.baiduyun.uploading.cfg",
-    "aText同步/AutoBackup-2023-07-20-14-13-28.atext",
-    "note.md.baiduyun.uploading.cfg",
-    "note.assets/image-20230714205952468.png.baiduyun.uploading.cfg",
+    "MouseInc/MouseInc.json.baiduyun.uploading.cfg",
+    "Obsidian.md.baiduyun.uploading.cfg",
+    "Obsidian.assets/image-20230721125336787.png.baiduyun.uploading.cfg",
+    "Obsidian.assets/image-20230721125336787.png",
+    "Obsidian.assets/image-20230721124937990.png.baiduyun.uploading.cfg",
+    "Obsidian.assets/image-20230721124937990.png",
+    "Obsidian.assets/image-20230721114235877.png.baiduyun.uploading.cfg",
+    "Obsidian.assets/image-20230721114235877.png",
+    "Obsidian.assets/image-20230721113818384.png.baiduyun.uploading.cfg",
+    "Obsidian.assets/image-20230721113818384.png",
+    "Obsidian.assets/image-20230721113521043.png.baiduyun.uploading.cfg",
+    "Obsidian.assets/image-20230721113521043.png",
+    "Obsidian.assets",
+    "学点金融.md.baiduyun.uploading.cfg",
+    "学点金融.md",
+    "Obsidian.md",
+    "Untitled.md.baiduyun.uploading.cfg",
+    "Untitled.md",
+    "note.md",
+    "core-main/packages/sfc-playground/README.md",
+    "core-main/packages/sfc-playground/README.md.baiduyun.uploading.cfg",
+    "core-main/changelogs/CHANGELOG-3.1.md",
     "note.assets/image-20230714205952468.png",
-    "src/02_Vue3基本指令/02_基本指令_v-once.html.baiduyun.uploading.cfg",
-    "src/02_Vue3基本指令/02_基本指令_v-once.html",
-    "src/02_Vue3基本指令/01_Mustache语法.html.baiduyun.uploading.cfg",
-    "note.assets/image-20230714202311918.png.baiduyun.uploading.cfg",
     "note.assets/image-20230714202311918.png",
-    "note.assets/image-20230714202000972.png.baiduyun.uploading.cfg",
     "note.assets/image-20230714202000972.png",
-    "note.assets/image-20230714201839449.png.baiduyun.uploading.cfg",
     "note.assets/image-20230714201839449.png",
     "note.assets/image-20230714201707700.png",
-    "学习日报/7月14日.assets/image-20230714160510220.png",
-    "学习日报/7月14日.assets/image-20230714160305383.png",
     "学习日报/7月14日.md",
     "学习日报/Untitled.md",
-    "note.assets/image-20230713204146055.png",
-    "note.assets/image-20230713171626313.png",
-    "note.assets/image-20230713171542093.png",
     "学习日报/7月13日.md",
     "note^3436ef.md",
-    "note.md",
     "学习日报/7月12日.md",
     "src/01_Vue3初体验/core/changelogs/CHANGELOG-3.2.md",
     "src/01_Vue3初体验/core/changelogs/CHANGELOG-3.1.md",
@@ -189,11 +197,6 @@
     "src/01_Vue3初体验/core/packages/server-renderer/README.md",
     "src/01_Vue3初体验/core/packages/runtime-test/README.md",
     "src/01_Vue3初体验/core/packages/runtime-core/README.md",
-    "src/01_Vue3初体验/core/packages/runtime-dom/README.md",
-    "src/01_Vue3初体验/core/packages/reactivity-transform/README.md",
-    "src/01_Vue3初体验/core/packages/reactivity/README.md",
-    "src/01_Vue3初体验/core/packages/dts-test/README.md",
-    "src/01_Vue3初体验/core/packages/compiler-ssr/README.md",
-    "src/01_Vue3初体验/core/packages/compiler-sfc/README.md"
+    "src/01_Vue3初体验/core/packages/runtime-dom/README.md"
   ]
 }

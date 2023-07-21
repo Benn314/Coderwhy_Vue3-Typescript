@@ -286,20 +286,20 @@
 			"Name": "显示桌面",
 			"Valid": false
 		},
-		"Open": false,
+		"Open": true,
 		"TopLeft": {
 			"Actions": [
-				["SendKeys", "Win+Tab"]
+				["SendKeys", "Ctrl+Win+Left"]
 			],
-			"Name": "切换桌面",
-			"Valid": false
+			"Name": "切换回左桌面",
+			"Valid": true
 		},
 		"TopRight": {
 			"Actions": [
-				["SendKeys", "Alt+F4"]
+				["SendKeys", "Ctrl+Win+Right"]
 			],
-			"Name": "关闭程序",
-			"Valid": false
+			"Name": "切换到右桌面",
+			"Valid": true
 		}
 	},
 	"Hotkeys": [{
@@ -574,12 +574,12 @@
 			"Sign": "DOWN-RIGHT-DOWN",
 			"Valid": true
 		}, {
-			"Valid": true,
-			"Sign": "W",
-			"Name": "console",
 			"Actions": [
 				["SendKeys", "F12"]
-			]
+			],
+			"Name": "console",
+			"Sign": "W",
+			"Valid": true
 		}],
 		"Match": ["Chrome.exe"],
 		"Name": "Chrome"

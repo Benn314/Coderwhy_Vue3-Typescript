@@ -1610,7 +1610,7 @@ v-if指令需要绑定在元素标签上，有时候我们并不想多创建一�
 
 ![image-20230719203042793](note.assets/image-20230719203042793.png)
 
-### 基本使用
+### v-for基本使用
 
 01_v-for的基本使用.html
 
@@ -1662,4 +1662,241 @@ v-if指令需要绑定在元素标签上，有时候我们并不想多创建一�
 
 
 ### 结合template
+
+ul标签下不建议加div标签，多用一个div，dom操作会多插入一个div，多少造成性能浪费，同事HTML文档标准也是不推荐这样去用的，我们可以用template标签来代替div标签，同时它不会被渲染出来；而且如果我们需要在渲染列表的同时穿插hr横线标签，我们照样可以用li标签代替，然后例如给他一个class="line"，修改样式为横线就行，优化性能（这一小段可作为面试知识点）
+
+v-for遍历会把当前元素和其子元素按照长度一次次渲染
+
+**02_v-for和template.html**
+
+```html
+  <body>
+    <div id="app"></div>
+
+    <template id="my-app">
+      <h2>v-for在template</h2>
+      <ul>
+        <template v-for="(value,key) in info">
+          <li>{{key}}</li>
+          <li>{{value}}</li>
+          <li class="line"></li>
+        </template>
+      </ul>
+      <hr />
+      <h2>v-for在div</h2>
+      <ul>
+        <div v-for="(value,key) in info">
+          <li>{{key}}</li>
+          <li>{{value}}</li>
+          <li class="line"></li>
+        </div>
+      </ul>
+      <hr />
+      <h2>v-for在ul</h2>
+      <ul v-for="(value,key) in info">
+        <li>{{key}}</li>
+        <li>{{value}}</li>
+        <li class="line"></li>
+      </ul>
+    </template>
+
+    <script src="../js/vue.js"></script>
+    <script>
+      const App = {
+        template: "#my-app",
+        data() {
+          return {
+            info: {
+              name: "why",
+              age: 18,
+              height: 185,
+            },
+          };
+        },
+      };
+
+      Vue.createApp(App).mount("#app");
+    </script>
+  </body>
+```
+
+​	
+
+### 数组更新检测
+
+![image-20230720145408756](note.assets/image-20230720145408756.png)
+
+**03_数组的修改方法.html**
+
+```html
+  <body>
+    <div id="app"></div>
+
+    <template id="my-app">
+      <h2>电影列表</h2>
+      <ul>
+        <li v-for="(item,index) in movies" :key="item">
+          {{index+1}}.{{ item }}
+        </li>
+      </ul>
+      <!-- 当在输入框中输入内容后按下回车键，就会触发 addMovie 方法 -->
+      <input type="text" v-model="newValue" @keyup.enter="addMovie"/>
+      <button @click="addMovie">点击添加</button>
+      <button @click="filter1">筛选名字长度大于2的电影</button>
+    </template>
+
+    <script src="../js/vue.js"></script>
+    <script>
+      const App = {
+        template: "#my-app",
+        data() {
+          return {
+            newValue: "",
+            movies: ["星际穿越", "盗梦空间", "西游记", "功夫瑜伽", "功夫瑜伽2",'小明','小红'],
+            info: {
+              name: "凌云木",
+              age: 18,
+              height: 185,
+            },
+          };
+        },
+        methods: {
+          addMovie() {
+            this.movies.push(this.newValue);
+            this.newValue = ""; // 重置输入框
+          },
+          filter1(){
+            this.movies = this.movies.filter(item=>item.length>2);
+          }
+        },
+      };
+
+      Vue.createApp(App).mount("#app");
+    </script>
+  </body>
+```
+
+​	
+
+### key
+
+> `key` 在这里是一个通过 `v-bind` 绑定的特殊 attribute。请不要和[在 `v-for` 中使用对象](https://cn.vuejs.org/guide/essentials/list.html#v-for-with-an-object)里所提到的对象属性名相混淆。
+
+![image-20230720162203192](note.assets/image-20230720162203192.png)
+
+![image-20230720163257617](note.assets/image-20230720163257617.png)
+
+![image-20230720163807677](note.assets/image-20230720163807677.png)
+
+#### 认识VNode
+
+![image-20230720164926148](note.assets/image-20230720164926148.png)
+
+![image-20230720165017806](note.assets/image-20230720165017806.png)
+
+![image-20230720165124960](note.assets/image-20230720165124960.png)
+
+VNode是描述结点元素来的
+
+**i标签干什么用**
+
+> 在HTML中，`<i>`标签用于表示斜体文本。然而，值得注意的是，`<i>`标签在HTML5中被弃用，不再用于表达斜体文本的意义。
+>
+> 在HTML5中，`<i>`标签被视为一个不重要的、纯粹用于样式的元素，它没有语义上的意义。建议在HTML5中使用更语义化的标签来表示斜体文本，如`<em>`标签。
+>
+> 所以，如果你想要表达强调、重点或特别注意的文本，最好使用`<em>`标签而不是`<i>`标签。`<em>`标签表示强调的内容，浏览器默认会将其显示为斜体，并且具有语义意义，有助于更好地理解文本内容。
+
+![image-20230720195822056](note.assets/image-20230720195822056.png)
+
+虚拟DOM和真实DOM在正常情况下不会一一对应（考虑组件的话），组件本身也有生成VNode，但组件本身不会在虚拟DOM渲染，最后虚拟DOM才生成我们的真实DOM
+
+##### 为什么不直接生成真实DOM？
+
+> 为了做跨平台，有虚拟DOM的话可以做服务端渲染，也可以做weex（移动端）
+>
+> ==weex是什么（做diff算法性能高点）==
+>
+> Weex是一种跨平台的移动应用开发框架，由阿里巴巴前端团队开发。它允许开发人员使用Vue.js框架来构建原生移动应用，同时支持iOS和Android平台。
+>
+> Weex的核心思想是将前端开发的能力扩展到移动端，通过使用Vue.js的组件化开发模式和语法，开发人员可以轻松地构建跨平台的移动应用，无需学习新的语言或技术。
+>
+> Weex的工作原理是将Vue.js组件编译成原生组件，然后在移动端运行。这样，开发人员可以使用熟悉的前端开发技术，同时利用原生移动应用的性能和体验优势。
+>
+> Weex不仅可以用于开发移动应用，还可以用于开发小程序和桌面应用等跨平台应用。它提供了丰富的组件和模块，可以满足各种应用的需求。
+>
+> 总的来说，Weex是一种便捷的跨平台移动应用开发框架，为开发人员提供了更高效、更灵活的方式来构建原生移动应用。
+
+##### VNode和虚拟DOM的区别：
+
+- VNode：（Virtual Node），是一个节点
+- VDOM：（Virtual DOM），是由多个VNode节点形成的树结构（VNode Tree）
+
+> 这一部分是模板编译的内容，他们两个会变成AST最后变成Render函数（变成createNode函数），后面章节会详细说明
+
+​	
+
+三种性能模式：
+
+1. 清空VNodes重新加载新的VNodes（性能最差）
+2. 保留部分旧的VNodes，从开始发生变化的地方进行修改（数据交换或者删除重新渲染）（性能较低）
+3. 运用diff算法，保留可保留的所有旧的VNodes，更新新的VNodes（vue干的事，性能较高）
+
+![image-20230720202444621](note.assets/image-20230720202444621.png)
+
+新的VNodes和旧的VNodes对比的过程就是diff算法实现的过程
+
+![image-20230720202635000](note.assets/image-20230720202635000.png)
+
+哪里需要发生变化，再去变化哪里（diff算法需要做的事情）
+
+**04_key案例-插入元素.html**
+
+```html
+  <body>
+    <div id="app"></div>
+
+    <template id="my-app">
+      <ul>
+        <li v-for="item in letters">{{item}}</li>
+      </ul>
+      <button @click="addF">插入F</button>
+      <!-- 重新插入元素，会导致ul重新遍历，也就会重新渲染VNodes，这时候就涉及到，怎么渲染的性能最高的问题了 -->
+    </template>
+
+    <script src="../js/vue.js"></script>
+    <script>
+      const App = {
+        template: "#my-app",
+        data() {
+          return {
+            letters: ["a", "b", "c", "d"],
+          };
+        },
+        methods: {
+          addF() {
+            this.letters.splice(2, 0, "f");
+          },
+        },
+      };
+
+      Vue.createApp(App).mount("#app");
+    </script>
+  </body>
+```
+
+![image-20230720203432751](note.assets/image-20230720203432751.png)
+
+> 注意：<li v-for="(item,index) in letters" :key="index">{{item}}</li> 
+>
+> 这里:key赋值index是不会提升性能的，只是让esLint停止警告而已，需要放入唯一的东西，例如id
+
+##### 源码阅读
+
+![image-20230720205114552](note.assets/image-20230720205114552.png)
+
+patch可以理解为更新
+
+patchUnkeyedChildren()方法（v-for没有key的算法）的操作思路如下：
+
+> 先对比旧VNodes列表和新VNodes列表的长度，取小的长度进行遍历（取大的可能会造成越界），依次对比节点信息是否相同，相同则保留不做处理，不相同则patch更新。遍历后，如果旧的节点数大于新的节点数则移除剩余的节点，否则则创建新的节点（VNode遍历短的，对比后保留长的，因为只有长的列表才有完整的源数据，看保留的是哪个长列表（新VNodes or 旧VNodes），做新增/删除节点操作）
 
