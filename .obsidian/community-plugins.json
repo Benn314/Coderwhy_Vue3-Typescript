@@ -6,5 +6,12 @@
   "obsidian-tasks-plugin",
   "obsidian-weread-plugin",
   "cmenu-plugin",
-  "obsidian-excalidraw-plugin"
+  "obsidian-excalidraw-plugin",
+  "obsidian-reveal-active-file",
+  "obsidian-hider",
+  "link-favicon",
+  "obsidian-cursor-location-plugin",
+  "easy-typing-obsidian",
+  "obsidian-better-command-palette",
+  "obsidian-hotkeys-for-specific-files"
 ]

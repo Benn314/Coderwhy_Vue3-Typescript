@@ -1,5 +1,7 @@
 ## Obsidian笔记自动化
 
+> 作者文章：https://catcoding.me/p/obsidian-for-programmer/
+
 ### 基础配置
 
 - 快捷键（自行配置）
@@ -28,4 +30,81 @@
 ​	
 
 ![image-20230721125336787](Obsidian.assets/image-20230721125336787.png)
+
+​	
+
+## 第二期插件推荐
+
+![image-20230721151541203](Obsidian.assets/image-20230721151541203.png)
+
+ ![image-20230721151722932](Obsidian.assets/image-20230721151722932.png)
+
+windows小软件，根据日出日落更换系统主题
+
+![image-20230721151820801](Obsidian.assets/image-20230721151820801.png)
+
+​	
+
+[up主Obsidian自用所有插件](https://github.com/chenyukang/share/blob/main/tools/obsidian/community-plugins.json)
+
+```json
+[
+  "obsidian-rename-image",
+  "obsidian-divide-and-conquer",
+  "obsidian-better-command-palette",
+  "calendar",
+  "cm-editor-syntax-highlight-obsidian",
+  "cmenu-plugin",
+  "copy-url-in-preview",
+  "cycle-through-panes",
+  "dataview",
+  "easy-typing-obsidian",
+  "editor-commands-remap",
+  "extract-url",
+  "file-explorer-note-count",
+  "hotkeysplus-obsidian",
+  "link-favicon",
+  "nldates-obsidian",
+  "note-refactor-obsidian",
+  "obsidian-checklist-plugin",
+  "obsidian-code-block-enhancer",
+  "obsidian-code-copy",
+  "obsidian-contextual-typography",
+  "obsidian-cursor-location-plugin",
+  "obsidian-emoji-toolbar",
+  "obsidian-excalidraw-plugin",
+  "obsidian-enhancing-mindmap",
+  "obsidian-focus-mode",
+  "obsidian-footnotes",
+  "obsidian-git",
+  "obsidian-hider",
+  "obsidian-hotkeys-for-specific-files",
+  "obsidian-hypothesis-plugin",
+  "obsidian-key-sequence-shortcut",
+  "obsidian-kindle-plugin",
+  "obsidian-local-images",
+  "obsidian-plugin-todo",
+  "obsidian-reading-time",
+  "obsidian-remember-file-state",
+  "obsidian-rich-links",
+  "obsidian-show-file-path",
+  "obsidian-smarter-md-hotkeys",
+  "obsidian-stille",
+  "obsidian-system-dark-mode",
+  "obsidian-tasks-plugin",
+  "obsidian-view-mode-by-frontmatter-yukang",
+  "obsidian-zoom",
+  "obsidian42-brat",
+  "open-vscode",
+  "oz-clear-unused-images",
+  "quickadd",
+  "shortcuts-extender",
+  "simple-embeds",
+  "sliding-panes-obsidian",
+  "templater-obsidian",
+  "various-complements",
+  "obsidian-yukang-self-tools",
+  "obsidian-reveal-active-file"
+]
+```
 

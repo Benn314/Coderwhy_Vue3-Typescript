@@ -9,4 +9,5 @@ TODOs.md
 .eslintcache
 dts-build/packages
 *.tsbuildinfo
+# vue3源码就不上传到github仓库了 有需要去官网看
 core-main
