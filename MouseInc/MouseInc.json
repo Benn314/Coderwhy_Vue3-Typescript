@@ -798,6 +798,13 @@
 		"Name": "Live Server",
 		"Sign": "C",
 		"Valid": true
+	}, {
+		"Actions": [
+			["SendKeys", "Ctrl+`"]
+		],
+		"Name": "打开终端",
+		"Sign": "LEFT-DOWN",
+		"Valid": true
 	}],
 	"MouseGesture": {
 		"AddMode": false,
