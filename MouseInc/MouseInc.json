@@ -624,9 +624,9 @@
 	}],
 	"MatchGlobal": [{
 		"Actions": [
-			["SendKeys", "Ctrl+Z"]
+			["SendKeys", "Ctrl+`"]
 		],
-		"Name": "撤回",
+		"Name": "打开终端",
 		"Sign": "UP",
 		"Valid": true
 	}, {
@@ -800,9 +800,9 @@
 		"Valid": true
 	}, {
 		"Actions": [
-			["SendKeys", "Ctrl+`"]
+			["SendKeys", "Ctrl+K"]
 		],
-		"Name": "打开终端",
+		"Name": "关闭已保存",
 		"Sign": "LEFT-DOWN",
 		"Valid": true
 	}],
