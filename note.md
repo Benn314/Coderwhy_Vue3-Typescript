@@ -1896,7 +1896,7 @@ VNode是描述结点元素来的
 
 patch可以理解为更新
 
-##### patchUnkeyedChildren()和patchkeyedChildren()方法
+##### diff算法——patchUnkeyedChildren()和patchkeyedChildren()方法
 
 - （v-for没有key的算法）的操作思路如下（3步）：
 
