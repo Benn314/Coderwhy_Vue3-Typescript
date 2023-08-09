@@ -539,7 +539,7 @@
 			],
 			"Name": "切换到左侧标签",
 			"Sign": "LEFT-RIGHT",
-			"Valid": true
+			"Valid": false
 		}, {
 			"Actions": [
 				["SendKeys", "Alt+Home"]
@@ -680,9 +680,9 @@
 		"Valid": true
 	}, {
 		"Actions": [
-			["SendKeys", "Escape"]
+			["SendKeys", "Ctrl+Shift+F"]
 		],
-		"Name": "Esc",
+		"Name": "全局搜索",
 		"Sign": "\\ UP",
 		"Valid": true
 	}, {
@@ -779,16 +779,18 @@
 		"Valid": true
 	}, {
 		"Actions": [
-			["Execute2", "notepad.exe"]
+			["Execute2"],
+			["SendKeys", "Ctrl+F"]
 		],
-		"Name": "打开记事本",
+		"Name": "查找",
 		"Sign": "RIGHT-LEFT",
 		"Valid": true
 	}, {
 		"Actions": [
-			["SendKeys", "Shift+Alt+F"]
+			["SendKeys"],
+			["Execute2", "notepad.exe"]
 		],
-		"Name": "格式化文档",
+		"Name": "打开记事本",
 		"Sign": "LEFT-RIGHT",
 		"Valid": true
 	}, {
@@ -800,9 +802,9 @@
 		"Valid": true
 	}, {
 		"Actions": [
-			["SendKeys", "Ctrl+K"]
+			["SendKeys", "Ctrl+L"]
 		],
-		"Name": "关闭已保存",
+		"Name": "清除网络日志",
 		"Sign": "LEFT-DOWN",
 		"Valid": true
 	}],
