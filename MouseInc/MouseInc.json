@@ -570,15 +570,15 @@
 			"Actions": [
 				["SendKeys", "F12"]
 			],
-			"Name": "打开控制台",
-			"Sign": "DOWN-RIGHT-DOWN",
+			"Name": "console",
+			"Sign": "W",
 			"Valid": true
 		}, {
 			"Actions": [
 				["SendKeys", "F12"]
 			],
-			"Name": "console",
-			"Sign": "W",
+			"Name": "打开控制台",
+			"Sign": "RIGHT",
 			"Valid": true
 		}],
 		"Match": ["Chrome.exe"],
@@ -613,13 +613,20 @@
 			"Valid": true
 		}, {
 			"Actions": [
-				["SendKeys", "Shift+Alt+F"]
+				["SendKeys", "Ctrl+P"]
 			],
-			"Name": "格式化文档",
-			"Sign": "LEFT-RIGHT",
+			"Name": "打开命令面板",
+			"Sign": "LEFT",
+			"Valid": true
+		}, {
+			"Actions": [
+				["SendKeys", "Ctrl+F"]
+			],
+			"Name": "查找",
+			"Sign": "RIGHT",
 			"Valid": true
 		}],
-		"Match": ["devenv.exe"],
+		"Match": ["devenv.exe", "Code.exe"],
 		"Name": "Visual Studio"
 	}],
 	"MatchGlobal": [{
@@ -702,8 +709,7 @@
 		"Valid": true
 	}, {
 		"Actions": [
-			["Internal", "tempstr"],
-			["Execute", "cmd /k ping %tempstr%"]
+			["SendKeys", "Ctrl+P"]
 		],
 		"Name": "ping选中地址",
 		"Sign": "P",
@@ -779,15 +785,13 @@
 		"Valid": true
 	}, {
 		"Actions": [
-			["Execute2"],
-			["SendKeys", "Ctrl+F"]
+			["Execute2", "notepad.exe"]
 		],
-		"Name": "查找",
+		"Name": "打开记事本",
 		"Sign": "RIGHT-LEFT",
 		"Valid": true
 	}, {
 		"Actions": [
-			["SendKeys"],
 			["Execute2", "notepad.exe"]
 		],
 		"Name": "打开记事本",
