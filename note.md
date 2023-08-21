@@ -1907,3 +1907,327 @@ patch可以理解为更新
   - 根据key值可分辨不同的节点（key相同，内容相同），比如做插入操作，它是通过while循环（因为不确定循环次数，所以用while比用for合适），从第一个遍历到新旧VNode列表不相同时，break跳出循环，接着从最后一次便利，同样不相同时跳出循环，如果新列表是有新增节点操作，则先插入null，后面mount进行挂载，如果新列表是删除节点操作，则用umount卸载节点。（列表有序操作）
   - 列表无序的意思是说旧VNode进行增删改后，通过前后while循环，中间不同的n个节点，新旧列表中有相同的节点，但相对位置不同，简单粗暴的解法是全删了重新新增，但这样效率太低（有利于人脑理解而已，我们要求的是效率高），所以根据key值，我们要新建一个数组列表，通过其算法（后续可自行谷歌）找出相同的节点存储到新建的数组列表中，后续再进行mount/umount（pdf资料有过程介绍，可以简单看下）![image-20230802205207889](note.assets/image-20230802205207889.png)
 
+​	
+
+# 04-Vue基础语法（三）Vue3 Option API
+
+补充：https://cn.vuejs.org/guide/essentials/list.html#v-for 
+
+> 1. 对于多层嵌套的 `v-for`，作用域的工作方式和函数的作用域很类似。每个 `v-for` 作用域都可以访问到父级作用域：
+>
+> ```vue
+> <li v-for="item in items">
+>   <span v-for="childItem in item.children">
+>     {{ item.message }} {{ childItem }}
+>   </span>
+> </li>
+> ```
+>
+> 你也可以使用 `of` 作为分隔符来替代 `in`，这更接近 JavaScript 的迭代器语法：
+>
+> ```vue
+> <div v-for="item of items"></div>
+> ```
+> 2. v-for="value, index in items" 和 v-for="(value, index) in items"，都是可以的，但是习惯用后者
+
+## Computed
+
+模板 -->(联想) template
+
+![image-20230821171414131](note.assets/image-20230821171414131.png)
+
+![image-20230821172005775](note.assets/image-20230821172005775.png)
+
+![image-20230821172017689](note.assets/image-20230821172017689.png)
+
+01_三个案例的实现-插值语法.html
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div id="app"></div>
+
+    <template id="my-app">
+      <div>
+        <h2>{{ firstName + ' ' + lastName }}</h2>
+        <h2>{{ score >= 60 ? '及格':'不及格' }}</h2>
+        <h2>{{ message.split(' ').reverse().join(' ') }}</h2>
+      </div>
+    </template>
+
+    <script src="../js/vue.js"></script>
+    <script>
+      const App = {
+        template: "#my-app",
+        data() {
+          return {
+            firstName: 'Ben',
+            lastName: 'qiu',
+            score: 80,
+            message: "hello world!",
+          };
+        },
+      };
+
+      Vue.createApp(App).mount("#app");
+    </script>
+  </body>
+</html>
+```
+
+![image-20230821173053595](note.assets/image-20230821173053595.png)
+
+02_三个案例的实现-methods.html
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div id="app"></div>
+
+    <template id="my-app">
+      <div>
+        <h2>{{ getFullName() }}</h2>
+        <h2>{{ getResult() }}</h2>
+        <h2>{{ getReverseMessage() }}</h2>
+      </div>
+    </template>
+
+    <script src="../js/vue.js"></script>
+    <script>
+      const App = {
+        template: "#my-app",
+        data() {
+          return {
+            firstName: 'Ben',
+            lastName: 'qiu',
+            score: 80,
+            message: "hello world!",
+          };
+        },
+        methods: {
+          getFullName(){
+            return this.firstName + ' ' + this.lastName
+          },
+          getResult(){
+            return this.score >= 60 ? '及格':'不及格'
+          },
+          getReverseMessage(){
+            return this.message.split(' ').reverse().join(' ')
+          }
+        },
+      };
+
+      Vue.createApp(App).mount("#app");
+    </script>
+  </body>
+</html>
+```
+
+![image-20230821173710043](note.assets/image-20230821173710043.png)
+
+03_三个案例的实现-computed.html
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div id="app"></div>
+
+    <template id="my-app">
+      <div>
+        <h2>{{ fullName }}</h2>
+        <h2>{{ result }}</h2>
+        <h2>{{ reverseMessage }}</h2>
+      </div>
+    </template>
+
+    <script src="../js/vue.js"></script>
+    <script>
+      const App = {
+        template: "#my-app",
+        data() {
+          return {
+            firstName: 'Ben',
+            lastName: 'qiu',
+            score: 80,
+            message: "hello world!",
+          };
+        },
+        computed: {
+          //fullName()这里看起来像methods函数，实际上是对象里其中一个getter的属性
+          fullName(){ // 赋值了一个函数，es6缩写了
+            return this.firstName + ' ' + this.lastName
+          },
+          result(){
+            return this.score >= 60 ? '及格':'不及格'
+          },
+          reverseMessage(){
+            return this.message.split(' ').reverse().join(' ')
+          }
+        }
+      };
+
+      Vue.createApp(App).mount("#app");
+    </script>
+  </body>
+</html>
+```
+
+---
+
+watch一般不监听computed，监听data和props多一点
+
+### 计算属性的实践原理是什么？
+
+> （待补充）
+
+---
+
+04_methods-computed区别.html
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div id="app"></div>
+
+    <template id="my-app">
+      <div>
+        <button @click="change">点我改变first name</button>
+        <h2>{{ fullName }}</h2>
+        <h2>{{ fullName }}</h2>
+        <h2>{{ fullName }}</h2>
+
+        <h2>{{ getFullName() }}</h2>
+        <h2>{{ getFullName() }}</h2>
+        <h2>{{ getFullName() }}</h2>
+      </div>
+    </template>
+
+    <script src="../js/vue.js"></script>
+    <script>
+      const App = {
+        template: "#my-app",
+        data() {
+          return {
+            firstName: 'Ben',
+            lastName: 'qiu',
+            score: 80,
+            message: "hello world!",
+          };
+        },
+        computed: {
+          //fullName()这里看起来像methods函数，实际上是对象里其中一个getter的属性
+          fullName(){ // 赋值了一个函数，es6缩写了
+            console.log('computed');
+            return this.firstName + ' ' + this.lastName
+          },
+        },
+        methods: {
+          getFullName(){
+            console.log('methods');
+            return this.firstName + ' ' + this.lastName
+          },
+          change(){
+            this.firstName = "coder"
+          }
+        },
+      };
+
+      Vue.createApp(App).mount("#app");
+    </script>
+  </body>
+</html>
+```
+
+​	
+
+### 计算属性的setter和getter
+
+在computed传入一个属性是对象还是函数，vue源码中只是将属性用三元运算符进行是否为函数的判断而已，computed选项和methods选项在vue源码中在同一个文件中
+
+05_computed的setter和getter.html
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div id="app"></div>
+
+    <template id="my-app">
+      <div>
+        <button @click="change">点我改变full name</button>
+        <h2>{{ fullName }}</h2>
+      </div>
+    </template>
+
+    <script src="../js/vue.js"></script>
+    <script>
+      const App = {
+        template: "#my-app",
+        data() {
+          return {
+            firstName: 'Ben',
+            lastName: 'qiu',
+            score: 80,
+            message: "hello world!",
+          };
+        },
+        computed: {
+          //fullName 的 getter方法（有return） 这种写法相当于是getter的一个语法糖，相对完整写法只是做了一个简单判断，下面展示完整写法
+          // fullName() {
+          //   return this.firstName + ' ' + this.lastName
+          // },
+          fullName:{
+            get: function(){
+              return this.firstName + ' ' + this.lastName
+            },
+            set: function(newValue){
+              console.log(newValue);
+              const names = newValue.split(" ")
+              // 简单使用，没有做值的越界判断(判断长度)
+              this.firstName = names[0]
+              this.lastName = names[1]
+            }
+          }
+        },
+        methods: {
+          change(){
+            this.fullName = "coder why"
+          }
+        },
+      };
+
+      Vue.createApp(App).mount("#app");
+    </script>
+  </body>
+</html>
+```
+

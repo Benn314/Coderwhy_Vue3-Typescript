@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div id="app"></div>
+
+    <template id="my-app">
+      <div>
+        <button @click="change">点我改变full name</button>
+        <h2>{{ fullName }}</h2>
+      </div>
+    </template>
+
+    <script src="../js/vue.js"></script>
+    <script>
+      const App = {
+        template: "#my-app",
+        data() {
+          return {
+            firstName: 'Ben',
+            lastName: 'qiu',
+            score: 80,
+            message: "hello world!",
+          };
+        },
+        computed: {
+          //fullName 的 getter方法（有return） 这种写法相当于是getter的一个语法糖，相对完整写法只是做了一个简单判断，下面展示完整写法
+          // fullName() {
+          //   return this.firstName + ' ' + this.lastName
+          // },
+          fullName:{
+            get: function(){
+              return this.firstName + ' ' + this.lastName
+            },
+            set: function(newValue){
+              console.log(newValue);
+              const names = newValue.split(" ")
+              // 简单使用，没有做值的越界判断(判断长度)
+              this.firstName = names[0]
+              this.lastName = names[1]
+            }
+          }
+        },
+        methods: {
+          change(){
+            this.fullName = "coder why"
+          }
+        },
+      };
+
+      Vue.createApp(App).mount("#app");
+    </script>
+  </body>
+</html>

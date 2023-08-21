@@ -625,6 +625,13 @@
 			"Name": "查找",
 			"Sign": "RIGHT",
 			"Valid": true
+		}, {
+			"Actions": [
+				["SendKeys", "F2+Ctrl+A+C"]
+			],
+			"Name": "复制文件名",
+			"Sign": "DOWN-UP",
+			"Valid": true
 		}],
 		"Match": ["devenv.exe", "Code.exe"],
 		"Name": "Visual Studio"

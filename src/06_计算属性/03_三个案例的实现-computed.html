@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div id="app"></div>
+
+    <template id="my-app">
+      <div>
+        <h2>{{ fullName }}</h2>
+        <h2>{{ result }}</h2>
+        <h2>{{ reverseMessage }}</h2>
+      </div>
+    </template>
+
+    <script src="../js/vue.js"></script>
+    <script>
+      const App = {
+        template: "#my-app",
+        data() {
+          return {
+            firstName: 'Ben',
+            lastName: 'qiu',
+            score: 80,
+            message: "hello world!",
+          };
+        },
+        computed: {
+          //fullName()这里看起来像methods函数，实际上是对象里其中一个getter的属性
+          fullName(){ // 赋值了一个函数，es6缩写了
+            return this.firstName + ' ' + this.lastName
+          },
+          result(){
+            return this.score >= 60 ? '及格':'不及格'
+          },
+          reverseMessage(){
+            return this.message.split(' ').reverse().join(' ')
+          }
+        }
+      };
+
+      Vue.createApp(App).mount("#app");
+    </script>
+  </body>
+</html>
