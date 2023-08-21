@@ -1930,7 +1930,7 @@ patch可以理解为更新
 > ```
 > 2. v-for="value, index in items" 和 v-for="(value, index) in items"，都是可以的，但是习惯用后者
 
-## Computed
+## computed
 
 模板 -->(联想) template
 
@@ -2166,6 +2166,8 @@ watch一般不监听computed，监听data和props多一点
 
 ### 计算属性的setter和getter
 
+![image-20230821192329535](note.assets/image-20230821192329535.png)
+
 在computed传入一个属性是对象还是函数，vue源码中只是将属性用三元运算符进行是否为函数的判断而已，computed选项和methods选项在vue源码中在同一个文件中
 
 05_computed的setter和getter.html
@@ -2230,4 +2232,14 @@ watch一般不监听computed，监听data和props多一点
   </body>
 </html>
 ```
+
+computed没写set属性是不能修改值的，写了set的话赋值是会调用执行到set方法的
+
+一般我们对一个对象的进行setter方法的调用时,调用的这个set方法称之为setter方法
+
+![image-20230821192218736](note.assets/image-20230821192218736.png)
+
+​	
+
+## watch
 

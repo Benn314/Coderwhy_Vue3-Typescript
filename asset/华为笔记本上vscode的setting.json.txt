@@ -1,0 +1,51 @@
+vscode setting.json
+
+{
+  "editor.mouseWheelZoom": true,
+  "explorer.confirmDelete": false,
+  "code-runner.runInTerminal": true,
+  "code-runner.saveFileBeforeRun": true,
+  // "code-runner.executorMap": {
+  //   "c": "cd $dir && gcc $fileName -o D:/C++Study/.vscode/$fileNameWithoutExt && D:/C++Study/.vscode/$fileNameWithoutExt",
+  //   "cpp": "cd $dir && g++ $fileName -o D:/C++Study/.vscode/$fileNameWithoutExt && D:/C++Study/.vscode/$fileNameWithoutExt "
+  // },
+  "files.autoGuessEncoding": true,
+
+  "terminal.integrated.profiles.windows": {
+    "PowerShell": {
+      "source": "PowerShell",
+      "overrideName": true,
+      "args": ["-NoExit", "/c", "chcp 65001"],
+      "icon": "terminal-powershell",
+      "env": {
+        "TEST_VAR": "value"
+      }
+    }
+  },
+  "terminal.integrated.defaultProfile.windows": "PowerShell",
+  "security.workspace.trust.untrustedFiles": "open",
+  "window.zoomLevel": 1,
+  "git.autofetch": true,
+  "editor.suggestSelection": "first",
+  "vsintellicode.modify.editor.suggestSelection": "automaticallyOverrodeDefaultValue",
+  "workbench.editor.autoLockGroups": {
+    "mainThreadWebview-markdown.preview": true
+  },
+  "git.confirmSync": false,
+  "jupyter.interactiveWindowMode": "perFile",
+
+  "code-runner.executorMap": {
+    "c": "gcc '$fileName' -o '$fileNameWithoutExt.exe' -Wall -O2 -m64 -lm -static-libgcc -std=c11 -finput-charset=utf-8 && &'./$fileNameWithoutExt.exe'",
+    "cpp": "g++ '$fileName' -o '$fileNameWithoutExt.exe' -Wall -O2 -m64 -static-libgcc -std=c++14 -finput-charset=utf-8 && &'./$fileNameWithoutExt.exe'"
+  },
+  "jupyter.jupyterServerType": "local",
+  "python.defaultInterpreterPath": "D:\\Anaconda\\envs\\pythonProject\\python.exe",
+  "leek-fund.statusBarStock": ["sh000300"],
+  "editor.linkedEditing": true,
+  // "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "diffEditor.ignoreTrimWhitespace": false,
+  "leetcode.endpoint": "leetcode-cn",
+  "leetcode.workspaceFolder": "C:\\Users\\小楷\\.leetcode",
+  "leetcode.defaultLanguage": "cpp",
+  "z-reader.onlineSite": "起点",
+  "backgroundC
