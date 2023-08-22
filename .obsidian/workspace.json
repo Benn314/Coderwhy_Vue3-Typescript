@@ -13,8 +13,8 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Obsidian.md",
-                "mode": "source",
+                "file": "note.md",
+                "mode": "preview",
                 "backlinks": true,
                 "source": false
               }
@@ -66,7 +66,8 @@
               "state": {}
             }
           }
-        ]
+        ],
+        "currentTab": 2
       }
     ],
     "direction": "horizontal",
@@ -86,7 +87,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "Obsidian.md",
+                "file": "note.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -103,7 +104,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "Obsidian.md",
+                "file": "note.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -126,7 +127,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Obsidian.md"
+                "file": "note.md"
               }
             }
           }
@@ -151,19 +152,24 @@
       "templater-obsidian:Templater": false
     }
   },
-  "active": "ac4ff6211b0e16ec",
+  "active": "260dc2d5e08176d1",
   "lastOpenFiles": [
+    "note.md.baiduyun.uploading.cfg",
+    "note.assets/image-20230821205659706.png.baiduyun.uploading.cfg",
+    "note.assets/image-20230821205659706.png",
+    "src/07_侦听器watch/02_侦听器的配置选项.html.baiduyun.uploading.cfg",
+    "src/07_侦听器watch/02_侦听器的配置选项.html",
+    "note.assets/image-20230821202440968.png.baiduyun.uploading.cfg",
+    "note.assets/image-20230821202440968.png",
+    "src/07_侦听器watch/01_侦听器的基本使用.html.baiduyun.uploading.cfg",
+    "note^5d8f9d.md",
+    "note.md",
+    "note^5d8f9d.md.baiduyun.uploading.cfg",
+    "Obsidian.md",
     "ChatGPT-Next-Web/yarn.lock.baiduyun.uploading.cfg",
     "ChatGPT-Next-Web/vercel.json.baiduyun.uploading.cfg",
     "ChatGPT-Next-Web/tsconfig.json.baiduyun.uploading.cfg",
     "ChatGPT-Next-Web/src-tauri/tauri.conf.json.baiduyun.uploading.cfg",
-    "ChatGPT-Next-Web/src-tauri/src/main.rs.baiduyun.uploading.cfg",
-    "ChatGPT-Next-Web/src-tauri/icons/StoreLogo.png.baiduyun.uploading.cfg",
-    "ChatGPT-Next-Web/src-tauri/icons/Square89x89Logo.png.baiduyun.uploading.cfg",
-    "ChatGPT-Next-Web/src-tauri/icons/Square71x71Logo.png.baiduyun.uploading.cfg",
-    "ChatGPT-Next-Web/src-tauri/icons/Square44x44Logo.png.baiduyun.uploading.cfg",
-    "ChatGPT-Next-Web/src-tauri/icons/Square310x310Logo.png.baiduyun.uploading.cfg",
-    "ChatGPT-Next-Web/src-tauri/icons/Square30x30Logo.png.baiduyun.uploading.cfg",
     "ChatGPT-Next-Web/public/macos.png",
     "ChatGPT-Next-Web/public/favicon-32x32.png",
     "ChatGPT-Next-Web/public/favicon-16x16.png",
@@ -172,8 +178,6 @@
     "ChatGPT-Next-Web/public/android-chrome-192x192.png",
     "ChatGPT-Next-Web/docs/images/vercel/vercel-env-edit.jpg",
     "ChatGPT-Next-Web/docs/images/vercel/vercel-redeploy.jpg",
-    "ChatGPT-Next-Web/docs/images/vercel/vercel-create-3.jpg",
-    "ChatGPT-Next-Web/docs/images/vercel/vercel-create-2.jpg",
     "ChatGPT-Next-Web/docs/vercel-es.md",
     "ChatGPT-Next-Web/docs/translation.md",
     "ChatGPT-Next-Web/docs/cloudflare-pages-es.md",
@@ -186,10 +190,8 @@
     "学习日报/7月27日.md",
     "学习日报/Untitled.md",
     "学习日报/7月25日.md",
-    "Obsidian.md",
     "学点金融.md",
     "Untitled.md",
-    "note.md",
     "core-main/packages/sfc-playground/README.md",
     "core-main/changelogs/CHANGELOG-3.1.md",
     "学习日报/7月14日.md",
@@ -197,7 +199,6 @@
     "note^3436ef.md",
     "学习日报/7月12日.md",
     "src/01_Vue3初体验/core/changelogs/CHANGELOG-3.2.md",
-    "src/01_Vue3初体验/core/changelogs/CHANGELOG-3.1.md",
-    "src/01_Vue3初体验/core/changelogs/CHANGELOG-3.0.md"
+    "src/01_Vue3初体验/core/changelogs/CHANGELOG-3.1.md"
   ]
 }

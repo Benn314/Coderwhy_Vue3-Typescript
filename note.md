@@ -2092,7 +2092,7 @@ patch可以理解为更新
 
 ---
 
-watch一般不监听computed，监听data和props多一点
+watch一般不监听computed，监听data和props多一点 ^5d8f9d
 
 ### 计算属性的实践原理是什么？
 
@@ -2243,3 +2243,129 @@ computed没写set属性是不能修改值的，写了set的话赋值是会调用
 
 ## watch
 
+![image-20230821202440968](note.assets/image-20230821202440968.png)
+
+在某些情况下，我们希望在代码逻辑中监听某个数据的变化，这个时候就需要用侦听器watch来完成了
+
+01_侦听器的基本使用.html
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div id="app"></div>
+
+    <template id="my-app">
+      <div>
+        您的问题：
+        <input type="text" v-model="question">
+        <button @click="queryAnswer">搜索答案</button>
+      </div>
+    </template>
+
+    <script src="../js/vue.js"></script>
+    <script>
+      const App = {
+        template: "#my-app",
+        data() {
+          return {
+            question: "hello world!",
+            answer:''
+          };
+        },
+        watch:{
+          question(newValue,oldValue){
+            console.log('新值: ',newValue,'旧值',oldValue);
+            this.queryAnswer();
+          }
+        },
+        methods: {
+          queryAnswer(){
+            console.log(`您的问题${this.question}答案是哈哈哈哈`);
+            this.answer = "";
+          }
+        },
+      };
+
+      Vue.createApp(App).mount("#app");
+    </script>
+  </body>
+</html>
+```
+
+[[note#^5d8f9d]]
+
+​	
+
+### 配置选项
+
+![image-20230821205659706](note.assets/image-20230821205659706.png)
+
+02_侦听器的配置选项.html
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div id="app"></div>
+
+    <template id="my-app">
+      <h2>{{ info.name }}</h2>
+      <button @click="changeInfo">changeInfo</button>
+      <button @click="changeInfoName">改变Info.name</button>
+    </template>
+
+    <script src="../js/vue.js"></script>
+    <script>
+      const App = {
+        template: '#my-app',
+        data() {
+          return {
+            // return 的最后变成proxy代理对象
+            info: { name: 'why', age: 18 },
+          }
+        },
+        watch: {
+          // 默认情况下我们的侦听器只会针对监听的数据本身的改变（内部发生的改变是不能侦听，需要的话需要深度侦听）
+          // info(newValue, oldValue) {
+          //   console.log('新值: ', newValue, '旧值', oldValue)
+          // },
+
+          // 深度侦听/立即执行
+          // 上面写法是下面handler写法的语法糖
+          info: {
+            handler: function (newInfo, oldInfo) {
+              console.log('新值: ', newInfo, '旧值', oldInfo)
+            },
+            deep: true, // 深度侦听
+            immediate: true, // 页面刷新无数据改变时也给我监听一次
+          },
+        },
+        methods: {
+          changeInfo() {
+            this.info = { name: 'ben' }
+          },
+          changeInfoName() {
+            this.info.name = 'ben' //只是改变内部属性watch侦听不到
+          },
+        },
+      }
+
+      Vue.createApp(App).mount('#app')
+    </script>
+  </body>
+</html>
+
+```
+
+视频进度：01:51:11

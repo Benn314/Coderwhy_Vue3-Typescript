@@ -20,6 +20,13 @@
       "path": "note.md",
       "subpath": "#^5e5364",
       "title": "面试彻底弄懂this指向推文"
+    },
+    {
+      "type": "file",
+      "ctime": 1692618745373,
+      "path": "note.md",
+      "subpath": "#^5d8f9d",
+      "title": "watch一般不监听computed"
     }
   ]
 }

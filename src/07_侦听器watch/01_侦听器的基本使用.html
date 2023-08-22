@@ -10,7 +10,9 @@
 
     <template id="my-app">
       <div>
-        <h2>{{ message }}</h2>
+        您的问题：
+        <input type="text" v-model="question">
+        <button @click="queryAnswer">搜索答案</button>
       </div>
     </template>
 
@@ -20,8 +22,25 @@
         template: "#my-app",
         data() {
           return {
-            message: "hello world!",
+            // 侦听question的变化时，去进行一些逻辑的处理（javascript，网络请求）
+            question: "hello world!",
+            answer:''
           };
+        },
+        watch:{
+          // question侦听的data中的属性的名称
+          // newValue变化后的新值
+          // oldValue变化后的旧值
+          question(newValue,oldValue){
+            console.log('新值: ',newValue,'旧值',oldValue);
+            this.queryAnswer();
+          }
+        },
+        methods: {
+          queryAnswer(){
+            console.log(`您的问题${this.question}答案是哈哈哈哈`);
+            this.answer = "";
+          }
         },
       };
 
