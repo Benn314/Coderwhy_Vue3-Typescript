@@ -2245,6 +2245,8 @@ computed没写set属性是不能修改值的，写了set的话赋值是会调用
 
 ![image-20230821202440968](note.assets/image-20230821202440968.png)
 
+![image-20230822190925003](note.assets/image-20230822190925003.png)
+
 在某些情况下，我们希望在代码逻辑中监听某个数据的变化，这个时候就需要用侦听器watch来完成了
 
 01_侦听器的基本使用.html
@@ -2305,6 +2307,8 @@ computed没写set属性是不能修改值的，写了set的话赋值是会调用
 ### 配置选项
 
 ![image-20230821205659706](note.assets/image-20230821205659706.png)
+
+> 可能原因：watch监听不到引用数据类型的旧值 or 深度监听同一个引用属性，没有对旧属性值做一个拷贝备份，如果我们需要这个旧值的话，那确实算一个bug（临时解决是需要我们自己手动拷贝旧值（深拷贝））
 
 02_侦听器的配置选项.html
 
@@ -2368,4 +2372,151 @@ computed没写set属性是不能修改值的，写了set的话赋值是会调用
 
 ```
 
-视频进度：01:51:11
+生命周期是函数，称为生命周期函数
+
+![image-20230822194224859](note.assets/image-20230822194224859.png)
+
+03_侦听器的其他方式.html
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div id="app"></div>
+
+    <template id="my-app">
+      <h2>{{ info.name }}</h2>
+      <button @click="changeInfo">changeInfo</button>
+      <button @click="changeInfoName">改变Info.name</button>
+      <button @click="changeFriendsName">改变friends[0].name</button>
+    </template>
+
+    <script src="../js/vue.js"></script>
+    <script>
+      const App = {
+        template: '#my-app',
+        data() {
+          return {
+            // return 的最后变成proxy代理对象
+            info: { name: 'why', age: 18, nba: { name: 'kobe' } },
+            friends: [{ name: 'xiaoming' }, { name: 'daming' }], // 这种语法不支持监听，太过复杂
+          }
+        },
+        watch: {
+          // 这种写法可以直接侦听某一属性，属性要加上引号，vue内部会进行对象解析
+          'info.name': function (newName, oldName) {
+            console.log(newName, oldName)
+          },
+          'friends[0].name': function (newName, oldName) {
+            console.log(newName, oldName)
+          },
+        },
+        methods: {
+          changeInfo() {
+            this.info = { name: 'ben' }
+          },
+          changeInfoName() {
+            this.info.name = 'ben' //只是改变内部属性watch侦听不到
+          },
+          changeFriendsName() {
+            this.friends[0].name = 'ben' //只是改变内部属性watch侦听不到
+          },
+        },
+        // 可以用$watch API在created生命周期函数进行监听, 并且它有unwatch返回值，执行unwatch可以取消侦听
+        created() {
+          const unwatch = this.$watch(
+            'info',
+            function (newInfo, oldInfo) {
+              // 这里可以使用箭头函数，因为this会从上级找，这里的上级也就是created
+              console.log(newInfo, oldInfo)
+            },
+            {
+              deep: true,
+              immediate: true,
+            }
+          )
+          // 执行一次侦听后返回unwatch，执行可取消侦听
+          unwatch()
+        },
+      }
+
+      Vue.createApp(App).mount('#app')
+    </script>
+  </body>
+</html>
+
+```
+
+​	
+
+## 购物车综合案例
+
+### splice三个参数介绍
+
+在 JavaScript 中，`splice()` 方法用于修改数组，可以用来添加、删除和替换数组中的元素。`splice()` 方法接受三个参数：
+
+1. **开始索引（start）：** 这是要修改数组的起始位置，也就是你想要添加、删除或替换的元素的位置。
+
+2. **删除的数量（deleteCount）：** 这是你想要删除的元素的数量。如果你不想删除任何元素，可以将这个参数设置为 0。
+
+3. **要插入的元素（item1, item2, ...）：** 这是你想要在开始索引位置插入的元素。你可以同时插入多个元素，它们会依次排列在数组中。
+
+下面是一些示例，以帮助你理解 `splice()` 方法的用法：
+
+```javascript
+const fruits = ['apple', 'banana', 'cherry', 'date'];
+
+// 删除元素：从索引 1 开始，删除 2 个元素（'banana' 和 'cherry'）
+fruits.splice(1, 2); // 结果为 ['apple', 'date']
+
+// 添加元素：从索引 1 开始，删除 0 个元素，插入 'orange'
+fruits.splice(1, 0, 'orange'); // 结果为 ['apple', 'orange', 'date']
+
+// 替换元素：从索引 1 开始，删除 1 个元素，插入 'grape'
+fruits.splice(1, 1, 'grape'); // 结果为 ['apple', 'grape', 'date']
+```
+
+需要注意的是，`splice()` 方法会在原数组上进行修改，并返回一个包含被删除的元素的新数组。如果你只想删除元素而不关心返回值，可以忽略接收返回值。
+
+​	
+
+改变我们的价格可以使用过滤器 Filter（只适合vue2，vue3不支持过滤器了，相关API在vue3中被删掉了）
+
+### 高阶函数是什么
+
+高阶函数是一种在计算机编程中的概念，它指的是接受一个或多个函数作为参数，并/或返回一个函数的函数。在函数式编程中，高阶函数是一种非常有用的概念，它允许你以更抽象和灵活的方式处理函数，从而使代码更加模块化、可重用和可维护。
+
+在 JavaScript 中，函数可以被传递给其他函数，也可以从函数中返回，因此你可以使用高阶函数来实现许多强大的功能。以下是一些常见的高阶函数的示例：
+
+1. **map()：** `map()` 是数组的方法，它接受一个函数作为参数，然后对数组中的每个元素都应用这个函数，并返回一个新的数组。
+
+2. **filter()：** `filter()` 是数组的方法，它接受一个函数作为参数，然后返回一个只包含符合条件的元素的新数组。
+
+3. **reduce()：** `reduce()` 是数组的方法，它接受一个函数作为参数，用于将数组中的元素逐个累积到一个值中。
+
+4. **forEach()：** `forEach()` 是数组的方法，它接受一个函数作为参数，用于对数组中的每个元素执行一次操作。
+
+5. **函数柯里化（Currying）：** 这是将一个接受多个参数的函数转化为接受一个参数的函数序列的过程。这使得函数更具通用性和复用性。
+
+6. **函数组合：** 这是将多个函数组合成一个新函数的过程。这可以通过将一个函数的输出作为另一个函数的输入来实现。
+
+使用高阶函数可以让代码更具有表现力、模块化和可维护性。它们提供了一种灵活的方式来操作函数，使得代码更容易扩展和修改。
+
+​	
+
+### 解释：Object.assign({}, item)
+
+`Object.assign()` 是 JavaScript 的一个内建函数，用于将一个或多个源对象的属性复制到目标对象中。在给定的示例中，`Object.assign({}, item)` 的作用是创建一个新的对象，并将 `item` 对象的所有属性复制到这个新对象中。
+
+具体解释如下：
+
+- `Object.assign(target, source1, source2, ...)` 接受一个目标对象 `target` 和一个或多个源对象 `source1`, `source2`, ...。
+- 它会将源对象的属性复制到目标对象中，如果目标对象已经存在相同属性，则会进行覆盖。
+- 如果目标对象是一个空对象（例如 `{}`），那么这个方法会在目标对象中创建一个与源对象相同的副本。
+
+在你的示例中，`Object.assign({}, item)` 创建了一个新的空对象 `{}`，然后将 `item` 对象的所有属性复制到这个新对象中。这样做的结果是获得了 `item` 对象的一个副本，而不是直接修改原始的 `item` 对象。这种方法常用于避免直接修改源对象，从而确保数据不会被意外修改。

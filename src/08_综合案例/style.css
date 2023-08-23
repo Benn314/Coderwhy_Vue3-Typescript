@@ -1,0 +1,21 @@
+table {
+  border: 1px solid #e9e9e9;
+  border-collapse: collapse; /*这个属性用于控制表格边框的折叠方式。collapse 表示相邻的边框会合并为一个单一的边框，使表格看起来更整洁。*/
+  border-spacing: 0; /* 这个属性设置相邻单元格之间的间隔。在这里，间隔被设置为 0，意味着单元格之间没有间隔，边框直接相连。 */
+}
+
+th, td {
+  padding: 8px 16px;
+  border: 1px solid #e9e9e9;
+  text-align: left;
+}
+
+th {
+  background-color: #f7f7f7;
+  color: #5c6b77;
+  font-weight: 600;
+}
+
+.counter {
+  margin: 0 5px;
+}

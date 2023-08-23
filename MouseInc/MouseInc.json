@@ -632,6 +632,13 @@
 			"Name": "复制文件名",
 			"Sign": "DOWN-UP",
 			"Valid": true
+		}, {
+			"Actions": [
+				["SendKeys", "Shift+Alt+F", "Ctrl+S"]
+			],
+			"Name": "格式化文档",
+			"Sign": "DOWN-RIGHT",
+			"Valid": true
 		}],
 		"Match": ["devenv.exe", "Code.exe"],
 		"Name": "Visual Studio"
