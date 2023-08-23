@@ -580,6 +580,13 @@
 			"Name": "打开控制台",
 			"Sign": "RIGHT",
 			"Valid": true
+		}, {
+			"Valid": true,
+			"Sign": "LEFT",
+			"Name": "切换暗色主题",
+			"Actions": [
+				["SendKeys", "Alt+Shift+D"]
+			]
 		}],
 		"Match": ["Chrome.exe"],
 		"Name": "Chrome"
