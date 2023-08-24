@@ -2790,3 +2790,147 @@ v-for和v-if不推荐一起用
 
 ### v-model
 
+![image-20230824193321176](note.assets/image-20230824193321176.png)
+
+语法糖就是缩写形式
+
+![image-20230824194250809](note.assets/image-20230824194250809.png)
+
+01_v-model的基本使用.html
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div id="app"></div>
+
+    <template id="my-app">
+      <div>
+        <!-- <input type="text" v-model="message"> -->
+        <!-- 效果跟上面等同, 操作如下：1. v-bind的绑定 2.监听input事件，更新message的值-->
+        <input type="text" :value="message" @input="inputChange">
+        <h2>{{ message }}</h2>
+      </div>
+    </template>
+
+    <script src="../js/vue.js"></script>
+    <script>
+      const App = {
+        template: "#my-app",
+        data() {
+          return {
+            message: "hello world!",
+          };
+        },
+        methods: {
+          inputChange(event){
+            this.message = event.target.value;
+          }
+        },
+      };
+
+      Vue.createApp(App).mount("#app");
+    </script>
+  </body>
+</html>
+```
+
+02_v-model绑定其他表单.html
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div id="app"></div>
+
+    <template id="my-app">
+      <!-- 1. 绑定textarea -->
+      <label for="intro">
+        自我介绍
+        <textarea
+          name="intro"
+          id="intro"
+          cols="30"
+          rows="10"
+          v-model="intro"
+        ></textarea>
+      </label>
+      <h2>intro: {{intro}}</h2>
+
+      <!-- 2.1 checkbox 单选框 -->
+      <label for="agree"
+        ><input id="agree" type="checkbox" v-model="isAgree" />同意协议</label
+      >
+      <h2>isAgree：{{isAgree}}</h2>
+      <!-- 
+        <label> 元素：<label> 是一个 HTML 元素，用于创建标签或标签组，通常与表单元素关联，以提高用户体验和可访问性。在这里，<label> 包裹了复选框元素，以便用户点击标签文本时也能选中复选框。
+        for 属性：for 属性用于将 <label> 与一个特定的表单元素关联起来。它的值应该是要关联的表单元素的 id 属性值。这样，当用户点击标签文本时，关联的表单元素会获得焦点或被选中。
+      -->
+
+      <!-- 2.2 复选框 input标签要加上value-->
+      <label for="basketball"
+        ><input id="basketball" type="checkbox" v-model="hobbies" value="basketball"/>篮球</label
+      >
+      <label for="football"
+        ><input id="football" type="checkbox" v-model="hobbies" value="football"/>足球</label
+      >
+      <label for="tennis"
+        ><input id="tennis" type="checkbox" v-model="hobbies" value="tennis"/>网球</label
+      >
+      <h2>hobbies:{{hobbies}}</h2>
+
+      <!-- 3.radio -->
+      <label for="male"
+        ><input id="male" type="radio" v-model="gender" value="male"/>男</label
+      >
+      <label for="female"
+        ><input id="female" type="radio" v-model="gender" value="female"/>女</label
+      >
+      <label for="notHuman"
+        ><input id="notHuman" type="radio" v-model="gender" value="notHuman"/>非人类</label
+      >
+      <h2>gender:{{gender}}</h2>
+
+      <!-- 4.select -->
+      <span>喜欢的水果:</span>
+      <!-- 加了multiple后可以多选 size决定select的高度-->
+      <select v-model="fruit" multiple size="2">
+        <option value="apple">苹果</option>
+        <option value="banana">香蕉</option>
+        <option value="pear">梨</option>
+      </select>
+      <h2>fruit:{{fruit}}</h2>
+    </template>
+
+    <script src="../js/vue.js"></script>
+    <script>
+      const App = {
+        template: '#my-app',
+        data() {
+          return {
+            intro: 'hello world!',
+            isAgree: false,
+            hobbies:[],
+            gender: '',
+            fruit:''
+          }
+        },
+      }
+
+      Vue.createApp(App).mount('#app')
+    </script>
+  </body>
+</html>
+
+```
+

@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      let nums = [3,2,4], target = 6
+      var twoSum = function(nums, target) {
+    let result = []
+    for(let i=0;i<nums.length;i++){
+        for(let j=i+1;j<nums.length;j++){
+            if(nums[i]+nums[j]==target){
+                // console.log('['+i+','+j+']')
+                result.push(i)
+                result.push(j)
+                // return result
+                console.log(result);
+            }
+        }
+    }
+};
+      twoSum(nums,target)
+    </script>
+  </body>
+</html>
