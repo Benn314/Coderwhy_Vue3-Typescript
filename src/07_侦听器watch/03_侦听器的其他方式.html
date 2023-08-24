@@ -23,7 +23,7 @@
           return {
             // return 的最后变成proxy代理对象
             info: { name: 'why', age: 18, nba: { name: 'kobe' } },
-            friends: [{ name: 'xiaoming' }, { name: 'daming' }], // 这种语法不支持监听，太过复杂
+            friends: [{ name: 'xiaoming' }, { name: 'daming' }],
           }
         },
         watch: {
@@ -32,8 +32,14 @@
             console.log(newName, oldName)
           },
           'friends[0].name': function (newName, oldName) {
+            // 这种语法不支持直接监听，太过复杂，需要开启deep进行深度监听才行
             console.log(newName, oldName)
           },
+          // 深度侦听，对于friends这种数据结构，这么深度侦听还不是最优解 我们可以采用组件的形式 图片放到note里了
+          // friends: {
+          //   handler(newFriends, oldFriends) {},
+          //   deep: true,
+          // },
         },
         methods: {
           changeInfo() {

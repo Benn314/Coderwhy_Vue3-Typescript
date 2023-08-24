@@ -2309,6 +2309,12 @@ computed没写set属性是不能修改值的，写了set的话赋值是会调用
 ![image-20230821205659706](note.assets/image-20230821205659706.png)
 
 > 可能原因：watch监听不到引用数据类型的旧值 or 深度监听同一个引用属性，没有对旧属性值做一个拷贝备份，如果我们需要这个旧值的话，那确实算一个bug（临时解决是需要我们自己手动拷贝旧值（深拷贝））
+>
+> 确定原因：Vue官方文档有进行说明
+>
+> ![image-20230823200113571](note.assets/image-20230823200113571.png)
+>
+> ![image-20230823200404022](note.assets/image-20230823200404022.png)
 
 02_侦听器的配置选项.html
 
@@ -2404,7 +2410,7 @@ computed没写set属性是不能修改值的，写了set的话赋值是会调用
           return {
             // return 的最后变成proxy代理对象
             info: { name: 'why', age: 18, nba: { name: 'kobe' } },
-            friends: [{ name: 'xiaoming' }, { name: 'daming' }], // 这种语法不支持监听，太过复杂
+            friends: [{ name: 'xiaoming' }, { name: 'daming' }],
           }
         },
         watch: {
@@ -2413,8 +2419,14 @@ computed没写set属性是不能修改值的，写了set的话赋值是会调用
             console.log(newName, oldName)
           },
           'friends[0].name': function (newName, oldName) {
+            // 这种语法不支持直接监听，太过复杂，需要开启deep进行深度监听才行
             console.log(newName, oldName)
           },
+          // 深度侦听，对于friends这种数据结构，这么深度侦听还不是最优解 我们可以采用组件的形式 图片放到note里了
+          // friends: {
+          //   handler(newFriends, oldFriends) {},
+          //   deep: true,
+          // },
         },
         methods: {
           changeInfo() {
@@ -2524,3 +2536,257 @@ fruits.splice(1, 1, 'grape'); // 结果为 ['apple', 'grape', 'date']
 ​	
 
 mustache语法是可以调用methods的
+
+​	
+
+**购物车案例代码：**
+
+index.html
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div id="app"></div>
+
+    <template id="my-app">
+      <template v-if="books.length>0">
+        <table>
+          <thead>
+            <th>序号</th>
+            <th>书籍名称</th>
+            <th>出版日期</th>
+            <th>价格</th>
+            <th>购买数量</th>
+            <th>操作</th>
+          </thead>
+          <tbody>
+            <tr v-for="(book,index) in books">
+              <td>{{index+1}}</td>
+              <td>{{book.name}}</td>
+              <td>{{book.date}}</td>
+              <td>{{formatPrice(book.price)}}</td>
+              <td>
+                <button :disabled="book.count<=1" @click="decrement(index)">
+                  -
+                </button>
+                <span class="counter">{{book.count}}</span>
+                <!-- <button @click="increment($event)">+</button> 事件对象要加上$ 进行获取-->
+                <button @click="increment(index)">+</button>
+              </td>
+              <td>
+                <button @click="removeBook(index)">移除</button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        <h2>总价格：{{formatPrice(totalPrice)}}</h2>
+      </template>
+      <template v-else>
+        <h2>购物车为空~</h2>
+      </template>
+    </template>
+
+    <script src="../js/vue.js"></script>
+    <script src="./index.js"></script>
+  </body>
+</html>
+
+```
+
+index.js
+
+```js
+Vue.createApp({
+  template: '#my-app',
+  data() {
+    return {
+      books: [
+        {
+          id: 1,
+          name: '《算法导论》',
+          date: '2006-9',
+          price: 85.00,
+          count: 1
+        },
+        {
+          id: 2,
+          name: '《UNIX编程艺术》',
+          date: '2006-2',
+          price: 59.00,
+          count: 1
+        },
+        {
+          id: 3,
+          name: '《编程珠玑》',
+          date: '2008-10',
+          price: 39.00,
+          count: 1
+        },
+        {
+          id: 4,
+          name: '《代码大全》',
+          date: '2006-3',
+          price: 128.00,
+          count: 1
+        },
+      ]
+    }
+  },
+  computed: {
+    totalPrice() {
+      let finalPrice = 0;
+      for (let book of this.books) {
+        finalPrice += book.count * book.price
+      }
+      // 比较笨的方法是不做过滤，直接在return处加单位
+      return finalPrice
+    },
+    // Vue3不支持过滤器了，推荐两种做法：使用计算属性和使用全局的方法
+    // 这种方式用得还是蛮多的，有时服务器返回的数据，格式并不是我们想要的，可以通过filter的map、item方式来做过滤转化
+    // 但是采用字符串拼接和filter都不是最佳选择，我们可以封装成一个method进行调用
+    filterBooks() {
+      return this.books.map(item => {
+        // 这里只做第一层拷贝
+        const newItem = Object.assign({}, item); // 之所以多做一份拷贝是为了原数组对象books不被破坏，不然totalPrice显示为NaN，因为乘法无法用于字符串
+        newItem.price = "￥" + item.price;
+        return newItem;
+      })
+    }
+  },
+  methods: {
+    increment(e) {
+      // console.log(e);
+      this.books[e].count++;
+    },
+    decrement(e) {
+      this.books[e].count--;
+    },
+    removeBook(index) {
+      this.books.splice(index, 1)
+    },
+    // 这里我们用方法实现过滤器的效果
+    // 我们当前formatPrice只对当前组件有效，如果我们希望其他组件也能用到，可以放到全局 app.config.globalProperties（后面会讲）相当于实现全局filter效果
+    formatPrice(price) {
+      return '￥' + price
+    }
+
+  },
+}).mount("#app");
+
+```
+
+style.css
+
+```css
+table {
+  border: 1px solid #e9e9e9;
+  border-collapse: collapse; /*这个属性用于控制表格边框的折叠方式。collapse 表示相邻的边框会合并为一个单一的边框，使表格看起来更整洁。*/
+  border-spacing: 0; /* 这个属性设置相邻单元格之间的间隔。在这里，间隔被设置为 0，意味着单元格之间没有间隔，边框直接相连。 */
+}
+
+th, td {
+  padding: 8px 16px;
+  border: 1px solid #e9e9e9;
+  text-align: left;
+}
+
+th {
+  background-color: #f7f7f7;
+  color: #5c6b77;
+  font-weight: 600;
+}
+
+.counter {
+  margin: 0 5px;
+}
+
+```
+
+
+
+​	
+
+# 05-Vue3组件化开发（一）
+
+## Vue3的表单和开发模式
+
+表单v-model
+
+用组件做watch，我们监听的话就是监听props里的friend，一般很少直接监听数组
+
+![用组件做watch](note.assets/image-20230823200940216.png)
+
+v-for和v-if不推荐一起用
+
+### 知识点补充：浅拷贝深拷贝
+
+> 引用赋值图就不画了~
+
+#### 浅拷贝图例
+
+![浅拷贝图例](note.assets/image-20230823202328620.png)
+
+![image-20230823202412324](note.assets/image-20230823202412324.png)
+
+如果对象里面有对象，那么里面的对象还有开辟一个新的内存空间，而他的值是新开辟空间的地址，因为对象都是引用类型
+
+01_对象的引用-浅拷贝-深拷贝.html
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script src="https://cdn.jsdelivr.net/npm/lodash@4.17.21/lodash.min.js"></script>
+
+    <!-- 1.对象的引用赋值 -->
+    <script>
+      const info1 = { name: 'ben', age: 18 }
+      const obj1 = info1
+      info1.name = 'cammile'
+      console.log(obj1.name) //cammile
+    </script>
+
+    <!-- 2.对象的浅拷贝 -->
+    <script>
+      const info2 = { name: 'ben', age: 18, friend: { name: 'xiaop' } }
+      // const obj2 = Object.assign({}, info2) // 浅拷贝的实现有多种，这里只是用了assign这种方法
+      // 采用lodash做浅拷贝
+      const obj2 = _.clone(info2)
+
+      info2.name = 'kobe'
+      console.log(obj2.name) // ben
+
+      info2.friend.name = 'xiaoz'
+      console.log(obj2.friend.name) // xiaoz
+
+    </script>
+
+    <!-- 3.对象的深拷贝 -->
+    <script>
+      const info3 = { name: 'ben', age: 18, friend: { name: 'xiaop' } }
+      // const obj3 = JSON.parse(JSON.stringify(info3)) // 采用原生的方式进行深拷贝 也可以用lodash的_.cloneDeep
+      const obj3 = _.cloneDeep(info3)
+      info3.friend.name = 'xiaoz'
+      console.log(obj3.friend.name) // xiaop
+    </script>
+  </body>
+</html>
+
+```
+
+​	
+
+### v-model
+

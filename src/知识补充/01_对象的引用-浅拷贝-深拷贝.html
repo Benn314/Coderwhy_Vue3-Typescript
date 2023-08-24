@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script src="https://cdn.jsdelivr.net/npm/lodash@4.17.21/lodash.min.js"></script>
+
+    <!-- 1.对象的引用赋值 -->
+    <script>
+      const info1 = { name: 'ben', age: 18 }
+      const obj1 = info1
+      info1.name = 'cammile'
+      console.log(obj1.name) //cammile
+    </script>
+
+    <!-- 2.对象的浅拷贝 -->
+    <script>
+      const info2 = { name: 'ben', age: 18, friend: { name: 'xiaop' } }
+      // const obj2 = Object.assign({}, info2) // 浅拷贝的实现有多种，这里只是用了assign这种方法
+      // 采用lodash做浅拷贝
+      const obj2 = _.clone(info2)
+
+      info2.name = 'kobe'
+      console.log(obj2.name) // ben
+
+      info2.friend.name = 'xiaoz'
+      console.log(obj2.friend.name) // xiaoz
+
+    </script>
+
+    <!-- 3.对象的深拷贝 -->
+    <script>
+      const info3 = { name: 'ben', age: 18, friend: { name: 'xiaop' } }
+      // const obj3 = JSON.parse(JSON.stringify(info3)) // 采用原生的方式进行深拷贝 也可以用lodash的_.cloneDeep
+      const obj3 = _.cloneDeep(info3)
+      info3.friend.name = 'xiaoz'
+      console.log(obj3.friend.name) // xiaop
+    </script>
+  </body>
+</html>
