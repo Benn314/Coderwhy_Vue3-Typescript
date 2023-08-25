@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div id="app"></div>
+
+    <template id="my-app">
+      <div>
+        <!-- 1. lazy修饰符 -->
+        <!-- 加了v-lazy后效果不是实时的了 等输入框输入完毕后点击回车才会绑定-->
+        <!-- <input type="text" v-model.lazy="message"> -->
+
+        <!-- 2. number修饰符 -->
+        <input type="number" v-model="message">
+        <h2>{{ message }}</h2>
+        <button @click="showType">查看类型</button>
+      </div>
+    </template>
+
+    <script src="../js/vue.js"></script>
+    <script>
+      const App = {
+        template: "#my-app",
+        data() {
+          return {
+            message: 100,
+          };
+        },
+        methods: {
+          showType(){
+            console.log(this.message,typeof this.message);
+          }
+        },
+      };
+
+      Vue.createApp(App).mount("#app");
+    </script>
+  </body>
+</html>
