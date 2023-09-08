@@ -504,7 +504,7 @@
 			],
 			"Name": "页面底部",
 			"Sign": "DOWN",
-			"Valid": true
+			"Valid": false
 		}, {
 			"Actions": [
 				["SendKeys", "Ctrl+R"]
@@ -581,12 +581,19 @@
 			"Sign": "RIGHT",
 			"Valid": true
 		}, {
-			"Valid": true,
-			"Sign": "LEFT",
-			"Name": "切换暗色主题",
 			"Actions": [
 				["SendKeys", "Alt+Shift+D"]
-			]
+			],
+			"Name": "切换暗色主题",
+			"Sign": "LEFT",
+			"Valid": true
+		}, {
+			"Actions": [
+				["SendKeys", "Ctrl+F"]
+			],
+			"Name": "查找",
+			"Sign": "DOWN",
+			"Valid": true
 		}],
 		"Match": ["Chrome.exe"],
 		"Name": "Chrome"
@@ -644,7 +651,7 @@
 				["SendKeys", "Shift+Alt+F", "Ctrl+S"]
 			],
 			"Name": "格式化文档",
-			"Sign": "DOWN-RIGHT",
+			"Sign": "RIGHT-DOWN",
 			"Valid": true
 		}],
 		"Match": ["devenv.exe", "Code.exe"],
