@@ -653,6 +653,13 @@
 			"Name": "格式化文档",
 			"Sign": "RIGHT-DOWN",
 			"Valid": true
+		}, {
+			"Valid": true,
+			"Sign": "DOWN-LEFT",
+			"Name": "格式化文档",
+			"Actions": [
+				["SendKeys", "Shift+Alt+F", "Ctrl+S"]
+			]
 		}],
 		"Match": ["devenv.exe", "Code.exe"],
 		"Name": "Visual Studio"
