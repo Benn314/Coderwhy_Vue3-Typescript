@@ -654,12 +654,12 @@
 			"Sign": "RIGHT-DOWN",
 			"Valid": true
 		}, {
-			"Valid": true,
-			"Sign": "DOWN-LEFT",
-			"Name": "格式化文档",
 			"Actions": [
 				["SendKeys", "Shift+Alt+F", "Ctrl+S"]
-			]
+			],
+			"Name": "格式化文档",
+			"Sign": "DOWN-LEFT",
+			"Valid": true
 		}],
 		"Match": ["devenv.exe", "Code.exe"],
 		"Name": "Visual Studio"
@@ -846,6 +846,13 @@
 		"Name": "清除网络日志",
 		"Sign": "LEFT-DOWN",
 		"Valid": true
+	}, {
+		"Valid": true,
+		"Sign": "N",
+		"Name": "N",
+		"Actions": [
+			["SendKeys", "N"]
+		]
 	}],
 	"MouseGesture": {
 		"AddMode": false,
