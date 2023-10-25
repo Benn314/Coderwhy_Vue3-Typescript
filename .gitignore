@@ -11,3 +11,4 @@ dts-build/packages
 *.tsbuildinfo
 # vue3源码就不上传到github仓库了 有需要去官网看
 core-main
+core_分崩离析版-需要调试Vue3源码请重新到github官方仓库进行clone

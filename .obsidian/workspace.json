@@ -139,23 +139,25 @@
   },
   "left-ribbon": {
     "hiddenItems": {
+      "obsidian-hypothesis-plugin:Sync your hypothesis highlights": false,
+      "obsidian-weread-plugin:Weread": false,
+      "obsidian-excalidraw-plugin:新建 Excalidraw 绘图": false,
+      "templater-obsidian:Templater": false,
       "switcher:打开快速切换": false,
       "graph:查看关系图谱": false,
       "canvas:新建白板": false,
       "daily-notes:打开/创建今天的日记": false,
       "templates:插入模板": false,
-      "command-palette:打开命令面板": false,
-      "obsidian-hypothesis-plugin:Sync your hypothesis highlights": false,
-      "obsidian-weread-plugin:Weread": false,
-      "obsidian-excalidraw-plugin:新建 Excalidraw 绘图": false,
-      "templater-obsidian:Templater": false
+      "command-palette:打开命令面板": false
     }
   },
   "active": "ac4ff6211b0e16ec",
   "lastOpenFiles": [
+    "Obsidian.md",
+    "note.md",
+    "2023-10-20.md",
     "2023-08-24.md",
     "2023-08-24.md.baiduyun.uploading.cfg",
-    "note.md",
     "note.md.baiduyun.uploading.cfg",
     "note.assets/image-20230821205659706.png.baiduyun.uploading.cfg",
     "note.assets/image-20230821205659706.png",
@@ -166,7 +168,6 @@
     "src/07_侦听器watch/01_侦听器的基本使用.html.baiduyun.uploading.cfg",
     "note^5d8f9d.md",
     "note^5d8f9d.md.baiduyun.uploading.cfg",
-    "Obsidian.md",
     "ChatGPT-Next-Web/yarn.lock.baiduyun.uploading.cfg",
     "ChatGPT-Next-Web/vercel.json.baiduyun.uploading.cfg",
     "ChatGPT-Next-Web/public/macos.png",

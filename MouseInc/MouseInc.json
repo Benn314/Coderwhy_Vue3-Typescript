@@ -655,14 +655,96 @@
 			"Valid": true
 		}, {
 			"Actions": [
-				["SendKeys", "Shift+Alt+F", "Ctrl+S"]
+				["SendKeys", "Alt+Shift+down"]
 			],
-			"Name": "格式化文档",
+			"Name": "复制到下一行",
 			"Sign": "DOWN-LEFT",
+			"Valid": true
+		}, {
+			"Actions": [
+				["SendKeys", "Alt+down"]
+			],
+			"Name": "移动到下一行",
+			"Sign": "LEFT-DOWN",
+			"Valid": true
+		}, {
+			"Actions": [
+				["SendKeys", "Alt+up"]
+			],
+			"Name": "向上移动一行",
+			"Sign": "UP-RIGHT-UP",
 			"Valid": true
 		}],
 		"Match": ["devenv.exe", "Code.exe"],
 		"Name": "Visual Studio"
+	}, {
+		"IgnoreGlobal": false,
+		"List": [{
+			"Actions": [
+				["SendKeys", "Ctrl+E"]
+			],
+			"Name": "切换预览模式",
+			"Sign": "DOWN",
+			"Valid": true
+		}, {
+			"Actions": [
+				["SendKeys", "Ctrl+H"]
+			],
+			"Name": "查找并替换",
+			"Sign": "LEFT",
+			"Valid": true
+		}, {
+			"Actions": [
+				["SendKeys", "Ctrl+Shift+F"]
+			],
+			"Name": "全局查找",
+			"Sign": "\\ UP",
+			"Valid": true
+		}, {
+			"Actions": [
+				["SendKeys", "Alt+C"]
+			],
+			"Name": "创建任务",
+			"Sign": "UP",
+			"Valid": true
+		}, {
+			"Actions": [
+				["SendKeys", "Ctrl+J"]
+			],
+			"Name": "打开大纲",
+			"Sign": "UP-DOWN",
+			"Valid": true
+		}, {
+			"Actions": [
+				["SendKeys", "Ctrl+W"]
+			],
+			"Name": "关闭标签页",
+			"Sign": "DOWN-RIGHT",
+			"Valid": true
+		}, {
+			"Actions": [
+				["SendKeys", "Ctrl+J"]
+			],
+			"Name": "打开大纲",
+			"Sign": "DOWN-UP",
+			"Valid": true
+		}, {
+			"Actions": [
+				["SendKeys", "Ctrl+Right"]
+			],
+			"Name": "展开/收起右侧边栏",
+			"Sign": "RIGHT-LEFT",
+			"Valid": true
+		}, {
+			"Actions": [
+				["SendKeys", "Ctrl+Left"]
+			],
+			"Name": "展开/收起左侧边栏",
+			"Sign": "LEFT-RIGHT",
+			"Valid": true
+		}],
+		"Match": ["Obsidian.exe"],
+		"Name": "Obsidian"
 	}],
 	"MatchGlobal": [{
 		"Actions": [
@@ -846,13 +928,6 @@
 		"Name": "清除网络日志",
 		"Sign": "LEFT-DOWN",
 		"Valid": true
-	}, {
-		"Valid": true,
-		"Sign": "N",
-		"Name": "N",
-		"Actions": [
-			["SendKeys", "N"]
-		]
 	}],
 	"MouseGesture": {
 		"AddMode": false,
