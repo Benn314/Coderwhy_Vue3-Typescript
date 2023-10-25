@@ -723,9 +723,9 @@
 			"Valid": true
 		}, {
 			"Actions": [
-				["SendKeys", "Ctrl+J"]
+				["SendKeys", "Ctrl+Shift+L"]
 			],
-			"Name": "打开大纲",
+			"Name": "打开文件列表",
 			"Sign": "DOWN-UP",
 			"Valid": true
 		}, {
